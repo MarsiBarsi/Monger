@@ -11,11 +11,9 @@ import { FixedPluginModule} from './shared/fixedplugin/fixedplugin.module';
 import { NguiMapModule} from '@ngui/map';
 
 import { DashboardComponent }   from './dashboard/dashboard.component';
-import { UserComponent }   from './user/user.component';
+import { ServiceComponent }   from './service/service.component';
 import { TableComponent }   from './table/table.component';
 import { TypographyComponent }   from './typography/typography.component';
-import { IconsComponent }   from './icons/icons.component';
-import { MapsComponent }   from './maps/maps.component';
 import { NotificationsComponent }   from './notifications/notifications.component';
 import { UpgradeComponent }   from './upgrade/upgrade.component';
 
@@ -23,11 +21,9 @@ import { UpgradeComponent }   from './upgrade/upgrade.component';
   declarations: [
     AppComponent,
     DashboardComponent,
-    UserComponent,
+    ServiceComponent,
     TableComponent,
     TypographyComponent,
-    IconsComponent,
-    MapsComponent,
     NotificationsComponent,
     UpgradeComponent
   ],
