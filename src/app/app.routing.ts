@@ -2,10 +2,10 @@ import { Routes } from '@angular/router';
 
 import { DashboardComponent }   from './dashboard/dashboard.component';
 import { ServiceComponent }   from './service/service.component';
-import { TableComponent }   from './table/table.component';
-import { TypographyComponent }   from './typography/typography.component';
-import { NotificationsComponent }   from './notifications/notifications.component';
-import { UpgradeComponent }   from './upgrade/upgrade.component';
+import { StatsComponent }   from './stats/stats.component';
+import { CashboxComponent }   from './cashbox/cashbox.component';
+import { StorageComponent }   from './storage/storage.component';
+import { FeedbackComponent }   from './feedback/feedback.component';
 
 export const AppRoutes: Routes = [
     {
@@ -22,19 +22,19 @@ export const AppRoutes: Routes = [
         component: ServiceComponent
     },
     {
-        path: 'table',
-        component: TableComponent
+        path: 'stats',
+        component: StatsComponent
     },
     {
-        path: 'typography',
-        component: TypographyComponent
+        path: 'cashbox',
+        component: CashboxComponent
     },
     {
-        path: 'notifications',
-        component: NotificationsComponent
+        path: 'storage',
+        component: StorageComponent
     },
     {
-        path: 'upgrade',
-        component: UpgradeComponent
+        path: 'feedback',
+        component: FeedbackComponent
     }
 ]

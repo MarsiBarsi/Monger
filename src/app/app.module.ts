@@ -12,20 +12,20 @@ import { NguiMapModule} from '@ngui/map';
 
 import { DashboardComponent }   from './dashboard/dashboard.component';
 import { ServiceComponent }   from './service/service.component';
-import { TableComponent }   from './table/table.component';
-import { TypographyComponent }   from './typography/typography.component';
-import { NotificationsComponent }   from './notifications/notifications.component';
-import { UpgradeComponent }   from './upgrade/upgrade.component';
+import { StatsComponent }   from './stats/stats.component';
+import { CashboxComponent }   from './cashbox/cashbox.component';
+import { StorageComponent }   from './storage/storage.component';
+import { FeedbackComponent }   from './feedback/feedback.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     ServiceComponent,
-    TableComponent,
-    TypographyComponent,
-    NotificationsComponent,
-    UpgradeComponent
+    StatsComponent,
+    CashboxComponent,
+    StorageComponent,
+    FeedbackComponent
   ],
   imports: [
     BrowserModule,

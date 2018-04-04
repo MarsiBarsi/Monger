@@ -12,13 +12,10 @@ export interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
     { path: 'dashboard', title: 'Главная',  icon: 'ti-panel', class: '' },
     { path: 'service', title: 'Принять заказ',  icon:'ti-receipt', class: '' },
-    { path: 'notifications', title: 'Склад',  icon:'ti-layout-grid3-alt', class: '' },
-    { path: 'table', title: 'Статистика',  icon:'ti-stats-up', class: '' },
-    { path: 'typography', title: 'Касса',  icon:'ti-money', class: '' },
-   // { path: 'icons', title: 'Icons',  icon:'ti-pencil-alt2', class: '' },
-   // { path: 'maps', title: 'Maps',  icon:'ti-map', class: '' },
-    
-    { path: 'upgrade', title: 'Сообщить об ошибке',  icon:'ti-headphone-alt', class: 'active-pro' }
+    { path: 'storage', title: 'Склад',  icon:'ti-layout-grid3-alt', class: '' },
+    { path: 'stats', title: 'Статистика',  icon:'ti-stats-up', class: '' },
+    { path: 'cashbox', title: 'Касса',  icon:'ti-money', class: '' },
+    { path: 'feedback', title: 'Сообщить об ошибке',  icon:'ti-headphone-alt', class: 'active-pro' }
 ];
 
 @Component({
