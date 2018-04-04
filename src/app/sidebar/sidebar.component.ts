@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-declare var $:any;
+declare let $:any;
 
 export interface RouteInfo {
     path: string;
@@ -15,7 +15,7 @@ export const ROUTES: RouteInfo[] = [
     { path: 'storage', title: 'Склад',  icon:'ti-layout-grid3-alt', class: '' },
     { path: 'stats', title: 'Статистика',  icon:'ti-stats-up', class: '' },
     { path: 'cashbox', title: 'Касса',  icon:'ti-money', class: '' },
-    { path: 'feedback', title: 'Сообщить об ошибке',  icon:'ti-headphone-alt', class: 'active-pro' }
+    { path: 'feedback', title: 'Сообщить об ошибке',  icon:'ti-headphone-alt', class: 'feedback' }
 ];
 
 @Component({

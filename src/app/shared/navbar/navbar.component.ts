@@ -26,13 +26,13 @@ export class NavbarComponent implements OnInit{
 
     ngOnInit(){
         this.listTitles = ROUTES.filter(listTitle => listTitle);
-        var navbar : HTMLElement = this.element.nativeElement;
+        let navbar : HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
     }
     getTitle(){
-        var titlee = window.location.pathname;
+        let titlee = window.location.pathname;
         titlee = titlee.substring(1);
-        for(var item = 0; item < this.listTitles.length; item++){
+        for(let item = 0; item < this.listTitles.length; item++){
             if(this.listTitles[item].path === titlee){
                 return this.listTitles[item].title;
             }
@@ -40,8 +40,8 @@ export class NavbarComponent implements OnInit{
         return 'Dashboard';
     }
     sidebarToggle(){
-        var toggleButton = this.toggleButton;
-        var body = document.getElementsByTagName('body')[0];
+        let toggleButton = this.toggleButton;
+        let body = document.getElementsByTagName('body')[0];
 
         if(this.sidebarVisible == false){
             setTimeout(function(){

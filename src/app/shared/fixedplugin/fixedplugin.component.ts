@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-declare var $:any;
+declare let $:any;
 
 @Component({
     moduleId: module.id,
@@ -10,9 +10,9 @@ declare var $:any;
 
 export class FixedPluginComponent implements OnInit{
     ngOnInit(){
-        var $sidebar = $('.sidebar');
-        var $off_canvas_sidebar = $('.off-canvas-sidebar');
-        var window_width = $(window).width();
+        let $sidebar = $('.sidebar');
+        let $off_canvas_sidebar = $('.off-canvas-sidebar');
+        let window_width = $(window).width();
 
         if(window_width > 767){
             if($('.fixed-plugin .dropdown').hasClass('show-dropdown')){
@@ -22,7 +22,6 @@ export class FixedPluginComponent implements OnInit{
         }
 
         $('.fixed-plugin a').click(function(event){
-          // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
             if($(this).hasClass('switch-trigger')){
                 if(event.stopPropagation){
                     event.stopPropagation();
@@ -37,7 +36,7 @@ export class FixedPluginComponent implements OnInit{
             $(this).siblings().removeClass('active');
             $(this).addClass('active');
 
-            var new_color = $(this).data('color');
+            let new_color = $(this).data('color');
 
             if($sidebar.length != 0){
                 $sidebar.attr('data-background-color',new_color);
@@ -52,7 +51,7 @@ export class FixedPluginComponent implements OnInit{
             $(this).siblings().removeClass('active');
             $(this).addClass('active');
 
-            var new_color = $(this).data('color');
+            let new_color = $(this).data('color');
 
             if($sidebar.length != 0){
                 $sidebar.attr('data-active-color',new_color);
