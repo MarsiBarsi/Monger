@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-declare interface TableData {
+export declare interface TableData {
     headerRow: string[];
     dataRows: string[][];
 }
@@ -13,7 +13,7 @@ declare interface TableData {
 
 export class StatsComponent implements OnInit{
     public tableData1: TableData;
-    public tableData2: TableData;
+    
     ngOnInit(){
         this.tableData1 = {
             headerRow: [ 'ID', 'Имя', 'Зарплата'],

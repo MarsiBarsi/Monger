@@ -1,5 +1,116 @@
     <div class="container-fluid">
-        <div class="card">
+        <div class="row">
             
+            <div id='new_product'>
+                <p>Новый товар:</p>
+            </div>
+
+            <div class="col-lg-3 col-sm-6">
+                <div class="card">
+                    <div class="content">
+
+                        <div class="row" (click)="myFunc()">
+                                <div class="col-xs-12">
+                                    <div>
+                                        <p>Имя товара</p>
+                                    </div>
+                                    
+                                    <div class="form-group has-success">     
+                                        <input type="text" value="" class="form-control" />
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6">
+                    <div class="card">
+                        <div class="content">
+    
+                            <div class="row" (click)="myFunc()">
+                                    <div class="col-xs-12">
+                                        <div>
+                                            <p>Стоимость</p>
+                                        </div>
+                                        
+                                        <div class="form-group has-success">     
+                                            <input type="text" value="" class="form-control" />
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+        
+                                <div class="row" (click)="myFunc()">
+                                        <div class="col-xs-12">
+                                            <div>
+                                                <p>Количество</p>
+                                            </div>
+                                            
+                                            <div class="form-group has-success">     
+                                                <input type="text" value="" class="form-control" />
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                            <div class="card">
+                                <div class="content">
+            
+            
+                                        <ul>
+                                            <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}">
+                                                <a [routerLink]="[menuItem.path]">
+                                                    
+                                                    <p>{{menuItem.title}}</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+            
+            
+            
+                                    <div class="row" (click)="myFunc()">
+                                        
+                                            <div class="col-xs-5">
+                                                <div class="icon-big icon-warning text-center">
+                                                    <i class="ti-arrow-circle-up"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-7">
+                                                <div>
+                                                    <p>Добавить товар</p>
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+            
+        </div>
+        <div class="card">
+            <div class="content table-responsive table-full-width">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th *ngFor="let cell of storageTable.headerRow">{{ cell }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of storageTable.dataRows">
+                            <td *ngFor="let cell of row">{{cell}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
