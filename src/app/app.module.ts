@@ -16,6 +16,7 @@ import { StatsComponent }   from './stats/stats.component';
 import { CashboxComponent }   from './cashbox/cashbox.component';
 import { StorageComponent }   from './storage/storage.component';
 import { FeedbackComponent }   from './feedback/feedback.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
