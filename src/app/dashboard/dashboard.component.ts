@@ -12,9 +12,7 @@ declare let $:any;
 })
 
 export class DashboardComponent implements OnInit{
-  myFunc() {
-    console.log(1);
-  }
+  
 
   ngOnInit(){
       let dataSales = {

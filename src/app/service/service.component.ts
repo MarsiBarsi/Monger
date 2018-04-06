@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StorageComponent } from '../storage/storage.component';
 
 @Component({
     selector: 'service-cmp',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ServiceComponent implements OnInit{
+    sumOfOrder : number = 0;
+
     ngOnInit(){
     }
 }

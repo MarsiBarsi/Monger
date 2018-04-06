@@ -6,7 +6,7 @@ declare let $:any;
 
 declare interface StorageTableData {
     headerRow: string[];
-    dataRows: (string | number)[][];
+    dataRows: Array<[number,string,number,number]>;
 }
 
 @Component({
@@ -18,14 +18,6 @@ declare interface StorageTableData {
 export class StorageComponent{
     public amount : number = 3;
 
-   /* public storageForm: FormGroup;
-
-    mainStorageForm = new FormGroup({
-        name : new FormControl('',[Validators.required, Validators.minLength(3)])
-        
-    }); */
-
-    vari : string = '';
 
     public storageTable: StorageTableData;
     
@@ -41,15 +33,19 @@ export class StorageComponent{
     };
 
     addNewProduct(nameOfProduct, priceOfProduct,amountOfProducts : HTMLInputElement) {
-        this.storageTable.dataRows.push([this.amount,nameOfProduct.value,priceOfProduct.value,amountOfProducts.value]);
+        this.storageTable.dataRows.push(
+            [this.amount,
+                nameOfProduct.value,
+                Number(priceOfProduct.value),
+                Number(amountOfProducts.value)]);
         this.amount++;
         nameOfProduct.value = '';
+        priceOfProduct.value = '';
+        amountOfProducts.value = '';
     }
 
-    deleteProduct(elem : any) {
-        console.log(elem);
-        
-       // delete this.storageTable.dataRows[number];
-        
+    deleteProduct(elem : HTMLElement) {
+       elem.parentElement.children[~~(elem.children[0].innerHTML) - 1].innerHTML = '';
+       delete this.storageTable.dataRows[~~(elem.children[0].innerHTML) - 1];
     }
 }
