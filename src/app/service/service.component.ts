@@ -8,8 +8,14 @@ import { StorageComponent } from '../storage/storage.component';
 })
 
 export class ServiceComponent implements OnInit{
+    
     sumOfOrder : number = 0;
 
     ngOnInit(){
+        
+    }
+
+    addToOrder(Item) {
+        
     }
 }

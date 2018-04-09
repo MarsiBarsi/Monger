@@ -8,7 +8,6 @@ import { SidebarModule } from './sidebar/sidebar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule} from './shared/navbar/navbar.module';
 import { FixedPluginModule} from './shared/fixedplugin/fixedplugin.module';
-import { NguiMapModule} from '@ngui/map';
 
 import { DashboardComponent }   from './dashboard/dashboard.component';
 import { ServiceComponent }   from './service/service.component';
@@ -17,6 +16,18 @@ import { CashboxComponent }   from './cashbox/cashbox.component';
 import { StorageComponent }   from './storage/storage.component';
 import { FeedbackComponent }   from './feedback/feedback.component';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyDvesSHD6cQ-jXKENOc3wbDCP4pAbNObjY",
+  authDomain: "monger-crm.firebaseapp.com",
+  databaseURL: "https://monger-crm.firebaseio.com",
+ 
+  storageBucket: "monger-crm.appspot.com",
+  messagingSenderId: "217864887577"
+};
 
 @NgModule({
   declarations: [
@@ -34,9 +45,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     SidebarModule,
     NavbarModule,
     FooterModule,
-    FixedPluginModule,
-    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
-
+    FixedPluginModule,    
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]
