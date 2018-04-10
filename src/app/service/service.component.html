@@ -15,35 +15,33 @@
                 </div>
             </div>
         </div>
-        
-        <div class="col-lg-3 col-sm-6" *ngFor="let product of products">
-            <div class="card">
-                <div class="content">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <label>Артикул: </label>
-                            <label #artikul>{{product[0]}}</label>
-                            <div class="text-center" #name>
-                                <h3 class="bg-success">{{product[1]}}</h3>
-                                <label> Остаток:</label>
-                                <label>{{product[3]}}</label>
-                                <label>| Цена:</label>
-                                <label>{{product[2]}}</label>
-                                <label> р.</label>
-                            
-                                <div>
-                                    <button class="btn btn-danger" (click)='minusProduct(artikul)'>Убрать</button>
-                                    <button class="btn btn-success" (click)='plusProduct(artikul)'>Добавить</button>
-                                </div> 
-                             </div>                           
-                         </div>
+        <div *ngFor="let product of products">
+            <div class="col-lg-3 col-sm-6" *ngIf="product[0]">
+                <div class="card">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label>Артикул: </label>
+                                <label #artikul>{{product[0]}}</label>
+                                <div class="text-center" #name>
+                                    <h3 class="bg-success">{{product[1]}}</h3>
+                                    <label> Остаток:</label>
+                                    <label>{{product[3]}}</label>
+                                    <label>| Цена:</label>
+                                    <label>{{product[2]}}</label>
+                                    <label> р.</label>
+                                
+                                    <div>
+                                        <button class="btn btn-danger" (click)='minusProduct(artikul)'>Убрать</button>
+                                        <button class="btn btn-success" (click)='plusProduct(artikul)'>Добавить</button>
+                                    </div> 
+                                </div>                           
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        
-    
+         </div>
     </div>
 
     <div class="card">
@@ -52,16 +50,25 @@
             </div>
 
 
-            <div class="content table-responsive table-full-width">
+            <div class="content table-responsive">
                 <table class="table table-striped">
                     <tbody>
+                        <tr>
+                            <th>Товар</th>
+                            <th>Количество в заказе</th>
+                            <th>Цена</th>
+                        </tr>
                         <tr *ngFor="let row of productsInOrder; let i = index">
-                            <td>{{ products[i][1] }}</td>
-                            <td>{{ row }}</td>
-                            <td></td>
+                            <td *ngIf="row">{{ products[i][1] }}</td>
+                            <td *ngIf="row">{{ row }}</td>
+                            <td *ngIf="row">{{ row * products[i][2] }}</td>
                         </tr>
                     </tbody>
                 </table>
+               <div class="content">
+                    <p>Итого: {{sumOfOrder}} р.</p>
+                    <button class="btn btn-success btn-lg">Оформить заказ</button>
+               </div>
             </div>
     </div>
 

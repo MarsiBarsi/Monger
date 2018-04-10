@@ -72,9 +72,13 @@ export class StorageComponent implements OnInit {
     }
 
     deleteProduct(elem : HTMLElement) {
-       elem.parentElement.children[~~(elem.children[0].innerHTML) - 1].innerHTML = '';
+        products[~~(elem.children[0].innerHTML) - 1] = [0,'',0,0];
+        
+        elem.innerHTML = '';
 
-       delete products[~~(elem.children[0].innerHTML) - 1];
-      
+    
+       
+       //elem.parentElement.children[~~(elem.children[0].innerHTML) - 1].innerHTML = '';
+       
     }
 }
