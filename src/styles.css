@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+.table-success {
+    color:#000;
+    background-color: #ccffcc;
+}
+
+.table-danger {
+    color:#000;
+    background-color:#ffd1d1;
+}
+
+#new_product {
+    margin-left: 25px;
+}

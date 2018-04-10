@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TableData } from '../stats/stats.component'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { products } from '../app.component'
+import { products, amounts } from '../app.component'
 
 import { AngularFireModule } from 'angularfire2'
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
@@ -40,7 +40,7 @@ export class StorageComponent implements OnInit {
     constructor(private afs: AngularFirestore) { };
 
 
-    public amount : number = 3;
+    //public amount : number = 3;
     public storageTable: StorageTableData;
     
     ngOnInit(){
@@ -59,12 +59,12 @@ export class StorageComponent implements OnInit {
 
     addNewProduct(nameOfProduct, priceOfProduct,amountOfProducts : HTMLInputElement) {
         products.push(
-            [this.amount,
+            [++amounts['products'],
                 nameOfProduct.value,
                 Number(priceOfProduct.value),
                 Number(amountOfProducts.value)]);
 
-        this.amount++;
+       
 
         nameOfProduct.value = '';
         priceOfProduct.value = '';
@@ -72,10 +72,7 @@ export class StorageComponent implements OnInit {
     }
 
     deleteProduct(elem : HTMLElement) {
-        let idToDelete = ~~(elem.children[0].innerHTML) - 1;
         
-        
-        products[idToDelete] = [0,'',0,0];
-        
+        products[~~(elem.children[0].innerHTML) - 1] = [0,'',0,0];
     }
 }

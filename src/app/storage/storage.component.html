@@ -1,24 +1,39 @@
 <div class="container-fluid">
     <div class="row">
-        <form>
+        
         <div id='new_product'>
             <p>Новый товар:</p>
         </div>
-
-
-        
-   
         <div class="col-lg-3 col-sm-6">
             <div class="card">
                 <div class="content">
-                    <div class="row" (click)="myFunc()">
+                    <div class="row" >
+                        <div class="col-xs-12">
+                            <div>
+                                <p>Имя товара</p>
+                            </div>
+                            
+                            <div class="form-group has-success">     
+                                <input type="text" value="" class="form-control" #nameOfProduct/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="content">
+    
+                    <div class="row" >
                             <div class="col-xs-12">
                                 <div>
-                                    <p>Имя товара</p>
+                                    <p>Стоимость</p>
                                 </div>
                                 
                                 <div class="form-group has-success">     
-                                    <input type="text" value="" class="form-control" #nameOfProduct/>
+                                    <input type="text" value="" class="form-control" #priceOfProduct/>
                                 </div>
                             </div>
                     </div>
@@ -26,29 +41,10 @@
             </div>
         </div>
 
-        <div class="col-lg-3 col-sm-6">
-                <div class="card">
-                    <div class="content">
-
-                        <div class="row" (click)="myFunc()">
-                                <div class="col-xs-12">
-                                    <div>
-                                        <p>Стоимость</p>
-                                    </div>
-                                    
-                                    <div class="form-group has-success">     
-                                        <input type="text" value="" class="form-control" #priceOfProduct/>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-        </div>
-
             <div class="col-lg-3 col-sm-6">
                     <div class="card">
                         <div class="content">
-                            <div class="row" (click)="myFunc()">
+                            <div class="row" >
                                     <div class="col-xs-12">
                                         <div>
                                             <p>Количество</p>
@@ -80,8 +76,9 @@
                             </div>
                         </div>
                 </div>
-            </form>
+            
     </div>
+
 
     <div class="card">
         <div class="content table-responsive table-full-width">

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { products,orders,moneyStream } from '../app.component'
+import { products,orders,moneyStream, amounts } from '../app.component'
 
 @Component({
     selector: 'service-cmp',
@@ -42,8 +42,35 @@ export class ServiceComponent implements OnInit{
             else {
                 this.productsInOrder[idInList] += 1;
             }
-            console.log(this.productsInOrder);
+            //console.log(this.productsInOrder);
         }
         //console.log(elem.children[0].innerHTML);
+    }
+
+    order() {
+        // заказ
+        let soldProducts = new Object();
+        
+        this.productsInOrder.forEach( (elem,index) => {
+            soldProducts[index] = elem;
+        });
+        //console.log(soldProducts);
+        orders.push([
+            ++amounts['orders'],
+            new Date(),
+            soldProducts
+        ]);
+        
+        // денежная операция
+        moneyStream.push([
+            ++amounts['moneyStream'],
+            new Date(),
+            'Заказ #' + amounts['orders'],
+            this.sumOfOrder
+        ]);
+
+        // готовимся к следующему заказу
+        this.sumOfOrder = 0;
+        this.productsInOrder = [];
     }
 }
