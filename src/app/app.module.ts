@@ -24,7 +24,7 @@ export const firebaseConfig = {
   apiKey: "AIzaSyDvesSHD6cQ-jXKENOc3wbDCP4pAbNObjY",
   authDomain: "monger-crm.firebaseapp.com",
   databaseURL: "https://monger-crm.firebaseio.com",
- 
+  projectId: "monger-crm",
   storageBucket: "monger-crm.appspot.com",
   messagingSenderId: "217864887577"
 };

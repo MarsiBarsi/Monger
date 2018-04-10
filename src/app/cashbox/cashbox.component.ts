@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { moneyStream } from '../app.component'
+
 
 @Component({
     selector: 'cashbox-cmp',
@@ -6,4 +8,7 @@ import { Component } from '@angular/core';
     templateUrl: 'cashbox.component.html'
 })
 
-export class CashboxComponent{}
+export class CashboxComponent{
+    moneyStream = moneyStream;
+    
+}

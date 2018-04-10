@@ -15,28 +15,54 @@
                 </div>
             </div>
         </div>
-
-        <div class="col-lg-3 col-sm-6">
+        
+        <div class="col-lg-3 col-sm-6" *ngFor="let product of products">
             <div class="card">
                 <div class="content">
                     <div class="row">
-                            <div class="col-xs-12">
+                        <div class="col-xs-12">
+                            <label>Артикул: </label>
+                            <label #artikul>{{product[0]}}</label>
+                            <div class="text-center" #name>
+                                <h3 class="bg-success">{{product[1]}}</h3>
+                                <label> Остаток:</label>
+                                <label>{{product[3]}}</label>
+                                <label>| Цена:</label>
+                                <label>{{product[2]}}</label>
+                                <label> р.</label>
+                            
                                 <div>
-                                    <h3>Товар 1</h3>
-                                    <p>Остаток: 22</p>
-                                    <p>Цена: 777 р.</p>
-                                </div>
-                                <div>
-                                    <button class="btn btn-danger">Убрать</button>
-                                    <button class="btn btn-success">Добавить</button>
-                                </div>                            
-                            </div>
+                                    <button class="btn btn-danger" (click)='minusProduct(artikul)'>Убрать</button>
+                                    <button class="btn btn-success" (click)='plusProduct(artikul)'>Добавить</button>
+                                </div> 
+                             </div>                           
+                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    
         
-
+        
+    
     </div>
+
+    <div class="card">
+            <div class="content">
+                <h3>Заказ: </h3>
+            </div>
+
+
+            <div class="content table-responsive table-full-width">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr *ngFor="let row of productsInOrder; let i = index">
+                            <td>{{ products[i][1] }}</td>
+                            <td>{{ row }}</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    </div>
+
 </div>
