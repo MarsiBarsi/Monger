@@ -93,8 +93,10 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let row of storageTable.dataRows" #name>
-                        <td *ngFor="let cell of row">{{cell}}</td>
-                        <td> <button class="btn btn-danger" (click)='deleteProduct(name)'>Удалить</button></td>
+                        <ng-container *ngIf="row[0]">
+                                <td *ngFor="let cell of row">{{cell}}</td>
+                                <td > <button class="btn btn-danger" (click)='deleteProduct(name)'>Удалить</button></td>
+                        </ng-container>
                         
                     </tr>
                 </tbody>
