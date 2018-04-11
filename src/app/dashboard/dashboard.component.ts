@@ -13,8 +13,12 @@ declare let $:any;
 
 export class DashboardComponent implements OnInit{
   
+  public menuItems: any[];
+  
 
   ngOnInit(){
+      this.menuItems = ROUTES;
+      
       let dataSales = {
         labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM'],
         series: [
