@@ -19,6 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
+import { DataTablesModule } from 'angular-datatables'
+
 export const firebaseConfig = {
   apiKey: "AIzaSyDvesSHD6cQ-jXKENOc3wbDCP4pAbNObjY",
   authDomain: "monger-crm.firebaseapp.com",
@@ -45,8 +47,8 @@ export const firebaseConfig = {
     NavbarModule,
     FooterModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
- 
+    AngularFirestoreModule,
+    DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
