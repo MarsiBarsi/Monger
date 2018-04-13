@@ -39,7 +39,6 @@ export class StorageComponent implements OnInit {
 
     constructor(private afs: AngularFirestore) { };
 
-
     //public amount : number = 3;
     public storageTable: StorageTableData;
     
@@ -72,7 +71,15 @@ export class StorageComponent implements OnInit {
     }
 
     deleteProduct(elem : HTMLElement) {
-        
         products[~~(elem.children[0].innerHTML) - 1] = [0,'',0,0];
+    }
+
+    changeProduct(indexOfProduct, newPriceOfProduct,newAmountOfProducts : HTMLInputElement) {
+        products[~~indexOfProduct.value - 1][2] = Number(newPriceOfProduct.value);
+        products[~~indexOfProduct.value - 1][3] = Number(newAmountOfProducts.value);
+
+        indexOfProduct.value = '';
+        newPriceOfProduct.value = '';
+        newAmountOfProducts.value = '';
     }
 }

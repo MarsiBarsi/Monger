@@ -73,4 +73,12 @@ export class ServiceComponent implements OnInit{
         this.sumOfOrder = 0;
         this.productsInOrder = [];
     }
+
+    cancel() {
+        this.productsInOrder.forEach( (elem,index) => {
+            products[index][3] += elem;
+        });
+        this.productsInOrder = [];
+        this.sumOfOrder = 0;
+    }
 }

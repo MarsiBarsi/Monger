@@ -7,7 +7,6 @@ import { AppRoutes } from './app.routing';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule} from './shared/navbar/navbar.module';
-import { FixedPluginModule} from './shared/fixedplugin/fixedplugin.module';
 
 import { DashboardComponent }   from './dashboard/dashboard.component';
 import { ServiceComponent }   from './service/service.component';
@@ -45,7 +44,6 @@ export const firebaseConfig = {
     SidebarModule,
     NavbarModule,
     FooterModule,
-    FixedPluginModule,    
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule
  

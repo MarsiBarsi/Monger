@@ -4,6 +4,12 @@ import { SidebarComponent, RouteInfo, ROUTES } from '../sidebar/sidebar.componen
 
 declare let $:any;
 
+const iconClasses : string[] = [
+  'icon-big icon-warning text-center',
+  'icon-big icon-success text-center',
+  'icon-big icon-danger text-center',
+  'icon-big icon-info text-center'
+];
 
 @Component({
     selector: 'dashboard-cmp',
@@ -13,11 +19,19 @@ declare let $:any;
 
 export class DashboardComponent implements OnInit{
   
-  public menuItems: any[];
+  public menuItems: any[] = [
+    
+  ];
   
-
   ngOnInit(){
-      this.menuItems = ROUTES;
+      for (let i = 1; i < ROUTES.length - 1; i++) {
+        this.menuItems[i - 1] = {
+          iconClass : iconClasses[i - 1],
+          icon : ROUTES[i].icon,
+          path : '../' + ROUTES[i].path,
+          title : ROUTES[i].title
+        };
+      }
       
       let dataSales = {
         labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM'],

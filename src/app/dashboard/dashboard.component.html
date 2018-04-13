@@ -1,87 +1,27 @@
     <div class="container-fluid">
-
-
         <div class="row">
-                    
 
-            <div class="col-lg-3 col-sm-6">
-                <div class="card">
-                    <div class="content">
-                        <div class="row">
-                                <div class="col-xs-5">
-                                    <div class="icon-big icon-warning text-center">
-                                        <i class="ti-receipt"></i>
+            <div class="col-lg-3 col-sm-6" *ngFor="let menuItem of menuItems" routerLinkActive="active">
+                <div class="card" >
+                    <a [routerLink]="[menuItem.path]">
+                        <div class="content">
+                            <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="{{menuItem.iconClass}}">
+                                            <i class="{{menuItem.icon}}"></i>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-7">
-                                    <div class="numbers">
-                                        <p>Принять заказ</p>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p class='text-dark'>{{menuItem.title}}</p>
+                                        </div>
                                     </div>
-                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
 
-            <div class="col-lg-3 col-sm-6">
-                <div class="card">
-                    <div class="content">
-                        <div class="row">
-                            <div class="col-xs-5">
-                                <div class="icon-big icon-success text-center">
-                                    <i class="ti-layout-grid3-alt"></i>
-                                </div>
-                            </div>
-                            <div class="col-xs-7">
-                                <div class="numbers">
-                                    <p>Склад</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="card">
-                    <div class="content">
-                        <div class="row">
-                            <div class="col-xs-5">
-                                <div class="icon-big icon-danger text-center">
-                                    <i class="ti-pulse"></i>
-                                </div>
-                            </div>
-                            <div class="col-xs-7">
-                                <div class="numbers">
-                                    <p>Статистика</p>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                       
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="card">
-                    <div class="content">
-                        <div class="row">
-                            <div class="col-xs-5">
-                                <div class="icon-big icon-info text-center">
-                                    <i class="ti-money"></i>
-                                </div>
-                            </div>
-                            <div class="col-xs-7">
-                                <div class="numbers">
-                                    <p>Касса</p>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    
-                    </div>
-                </div>
-            </div>
 
 
         </div>

@@ -76,10 +76,90 @@
                             </div>
                         </div>
                 </div>
-            
     </div>
 
+    <div class="row">
+        
+        <div id='new_product'>
+            <p>Изменить товар:</p>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="content">
+                    <div class="row" >
+                        <div class="col-xs-12">
+                            <div>
+                                <p>Артикул товара</p>
+                            </div>
+                            
+                            <div class="form-group has-success">     
+                                <input type="text" value="" class="form-control" #indexOfProduct/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="content">
+    
+                    <div class="row" >
+                            <div class="col-xs-12">
+                                <div>
+                                    <p>Новая стоимость</p>
+                                </div>
+                                
+                                <div class="form-group has-success">     
+                                    <input type="text" value="" class="form-control" #newPriceOfProduct/>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="col-lg-3 col-sm-6">
+                    <div class="card">
+                        <div class="content">
+                            <div class="row" >
+                                <div class="col-xs-12">
+                                    <div>
+                                        <p>Новое количество</p>
+                                    </div>
+                                    
+                                    <div class="form-group has-success">     
+                                        <input type="text" value="" class="form-control" #newAmountOfProducts/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                        <div class="card" (click)='changeProduct(indexOfProduct, newPriceOfProduct, newAmountOfProducts)'>
+                            <div class="content">
+                                <div class="row">
+                                        <div class="col-xs-5">
+                                            <div class="icon-big icon-info text-center">
+                                                <i class="ti-pencil-alt"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <div>
+                                                <p>Изменить товар</p>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+    </div>
+
+    <div id='new_product'>
+        <p>Склад:</p>
+    </div>
     <div class="card">
         <div class="content table-responsive table-full-width">
             <table class="table table-striped">
