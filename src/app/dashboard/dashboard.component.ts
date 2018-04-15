@@ -27,11 +27,10 @@ export class DashboardComponent implements OnInit{
   ordersFromToday() {
     let now : Date = new Date();
     let outAmount : number[] = [0,0,0,0,0,0]; // 9-12-15-18-21-24
-    let array = new Array();
-    array = orders;
-    array.forEach( elem => {
-      if (Number(now) - Number(elem[1]) < 86400000) {
-        let hour : number = Number(elem[1].getHours);
+    
+    orders.forEach( elem => {
+      if (Number(now) - Number(elem[1]) < 86400000) { // from the last day 
+        let hour : number = elem[1].getHours();
         if (hour <= 16) { // 9-12-15
           if (hour >= 14) {
             outAmount[2]++;
@@ -72,9 +71,6 @@ export class DashboardComponent implements OnInit{
         };
       }
 
-       
-      //console.log(this.ordersFromToday());
-
       let dataSales = {
         labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM'],
         series: [
@@ -84,7 +80,7 @@ export class DashboardComponent implements OnInit{
 
       let optionsSales = {
         low: 0,
-        high: (this.ordersFromToday())['total'] + 10 ,
+        high: (this.ordersFromToday())['total'] + 5 ,
         showArea: true,
         height: "245px",
         axisX: {
