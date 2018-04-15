@@ -51,10 +51,12 @@ export class ServiceComponent implements OnInit{
         // заказ
         let soldProducts = new Object();
         
-        this.productsInOrder.forEach( (elem,index) => {
-            soldProducts[index] = elem;
-        });
-        //console.log(soldProducts);
+        for (let i = 0; i < this.productsInOrder.length; i++) {
+            if (this.productsInOrder[i]) {
+                soldProducts[i+1] = this.productsInOrder[i];
+            }
+        }
+
         orders.push([
             ++amounts['orders'],
             new Date(),

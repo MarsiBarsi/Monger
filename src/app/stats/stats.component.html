@@ -1,25 +1,38 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="header">
-                    <h4 class="title">Табличка</h4>
-                    <p class="category">с работниками</p>
-                </div>
-                <div class="content table-responsive table-full-width">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let row of tableData1.dataRows">
-                                <td *ngFor="let cell of row">{{cell}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <div class="row">
 
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Самые продаваемые товары</h4>        
+                    </div>
+                    
+                        <ngx-charts-advanced-pie-chart
+                        [view]="view"
+                        [scheme]="colorScheme"
+                        [results]="data"
+                        [gradient]="gradient"
+                        (select)="onSelect($event)">
+                        </ngx-charts-advanced-pie-chart>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="card">
+                    
+                    <div class="header">
+                        <h4 class="title">Статистика продаж товаров</h4>
+                        
+                    </div>
+                    <div class="content">
+                        <div id="chartHours" class="ct-chart"></div>
+                        <div class="footer">
+                            <div class="chart-legend">
+                                <i class="fa fa-circle text-info"></i> Покупатели
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

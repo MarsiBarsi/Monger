@@ -3,7 +3,6 @@ import * as Chartist from 'chartist';
 import { SidebarComponent, RouteInfo, ROUTES } from '../sidebar/sidebar.component';
 import { orders } from '../app.component';
 
-declare let $:any;
 
 const iconClasses : string[] = [
   'icon-big icon-warning text-center',
@@ -108,5 +107,4 @@ export class DashboardComponent implements OnInit{
     }
 
 
-    
 }

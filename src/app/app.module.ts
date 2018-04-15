@@ -21,6 +21,9 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { DataTablesModule } from 'angular-datatables'
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 export const firebaseConfig = {
   apiKey: "AIzaSyDvesSHD6cQ-jXKENOc3wbDCP4pAbNObjY",
   authDomain: "monger-crm.firebaseapp.com",
@@ -48,7 +51,9 @@ export const firebaseConfig = {
     FooterModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
-    DataTablesModule
+    DataTablesModule,
+    NgxChartsModule,
+    BrowserAnimationsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
