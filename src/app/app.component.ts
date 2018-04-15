@@ -18,13 +18,14 @@ export let moneyStream : Array<[number,Date,string,number]> = [
 
 export let orders : Array<[number,Date,Object ]> = [
   // [id,date, {productId : amount}]
-  [1,new Date(2018, 0, 1, 0, 0, 0, 0), { 1 : 2} ]
+  [1,new Date(2018, 0, 1, 0, 0, 0, 0), { 1 : 2} ],
+  [2,new Date(), { 1 : 1 } ]
 ];
 
 export let amounts : Object = {
   products : 2,
   moneyStream : 2,
-  orders : 1
+  orders : 2
 }
 
 

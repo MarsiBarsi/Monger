@@ -33,6 +33,7 @@ declare interface StorageTableData {
     templateUrl: 'storage.component.html'
 })
 
+
 export class StorageComponent implements OnInit {
     productsCollection : AngularFirestoreCollection<DataRow>;
     products : Observable<DataRow[]>
@@ -43,7 +44,9 @@ export class StorageComponent implements OnInit {
     public storageTable: StorageTableData;
     
     ngOnInit(){
-       
+        
+    
+
         this.productsCollection = this.afs.collection('crm');
         this.products = this.productsCollection.valueChanges()
 
