@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { TableData } from '../stats/stats.component'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 
-import { moneyStream } from '../app.component'
+import { moneyStream,amounts } from '../app.component'
 
 
 declare interface CashboxTableData {
@@ -18,7 +18,7 @@ declare interface CashboxTableData {
 })
 
 export class CashboxComponent{
-    amount : number = 3;
+    
 
     moneyStream = moneyStream;
     public cashboxTable: CashboxTableData;
@@ -45,13 +45,11 @@ export class CashboxComponent{
 
     addNewOperation(nameOfOperation, changeOfBalance : HTMLInputElement) {
         moneyStream.push([
-            this.amount,
+            ++amounts['moneyStream'],
             new Date(),
             nameOfOperation.value,
             Number(changeOfBalance.value)
         ]);
-        
-        this.amount++;
         
         if (Number(changeOfBalance.value) > 0) {
             this.income += Number(changeOfBalance.value);

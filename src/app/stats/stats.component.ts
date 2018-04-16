@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
-import { amounts,orders, products } from '../app.component';
+import { amounts,orders, products, moneyStream } from '../app.component';
 
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 export let data = [];
+
 
 
 export declare interface TableData {
@@ -19,14 +20,29 @@ export declare interface TableData {
 })
 
 export class StatsComponent implements OnInit{
-    
+    public wholeStatistics = [
+        { 
+            mes : 'Всего заказов завершено',
+            value  : amounts['orders']
+        },
+        { 
+            mes : 'Всего операций выполнено',
+            value  : amounts['moneyStream']
+        },
+        { 
+            mes : 'Типов товаров',
+            value  : amounts['products']
+        }
+    ];
+
     single: any[];
     multi: any[];
     
     view: any[] = [$(this).parent().width(),$(this).parent().height()];
-  
+    
+
     colorScheme = {
-      domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+      domain: ['#7fb5b5','#6dae81','#5AA454', '#A10A28', '#C7B42C', '#AAAAAA','#ffcc00','#ffad99','#77d4c4']
     };
   
     constructor() {
@@ -36,50 +52,12 @@ export class StatsComponent implements OnInit{
     onSelect(event) {
       console.log(event);
     }
-    
 
-    public tableData1: TableData;
-    ordersFromToday() {
-        let now : Date = new Date();
-        let outAmount : number[] = [0,0,0,0,0,0]; // 9-12-15-18-21-24
-        
-        orders.forEach( elem => {
-          if (Number(now) - Number(elem[1]) < 86400000) { // from the last day 
-            let hour : number = elem[1].getHours();
-            if (hour <= 16) { // 9-12-15
-              if (hour >= 14) {
-                outAmount[2]++;
-              }
-              else if (hour >= 11) {
-                outAmount[1]++;
-              }
-              else {
-                outAmount[0]++;
-              }
-            }
-            else { // 18-21-24
-              if (hour <= 19) {
-                outAmount[3]++;
-              }
-              else if (hour <= 22) {
-                outAmount[4]++;
-              }
-              else {
-                outAmount[5]++;
-              }
-            }
-          }
-        });
-        outAmount['total'] = outAmount.reduce( (sum,elem) => {
-          return sum + elem;
-        });
-        return outAmount;
-      }
 
     selectStatistics(){
         
         let arrayOfProducts = [];
-
+        
         orders.forEach( elem => {
             for(let key in elem[2]) {
                 if( arrayOfProducts[Number(key)]) {
@@ -90,58 +68,99 @@ export class StatsComponent implements OnInit{
                 }
             }
         });
+
         let i = 0;
-        console.log(arrayOfProducts);
+        //console.log(arrayOfProducts);
         
         arrayOfProducts.forEach( (elem,index) => {
-            data[i] = ({
+            data[i] = {
                 name : products[index - 1][1],
                 value : elem
-            });
+            };
             i++;
         });
         
     }
     
+    ordersFromToday() {
+        return [1,2,3,4,5,6]
+    }
+
+    getMainProfit() {
+        
+        let finalObject = {
+          labels : [],
+          series : [
+              []
+            ],
+          min : 0,
+          max : 0
+        };
+        console.log(moneyStream);
+
+        finalObject.series[0][-1] = 0; // for the first iteration
+        for (let i = 0; i < moneyStream.length; i++) {
+            finalObject.labels.push(moneyStream[i][3]);
+            finalObject.series[0].push(finalObject.series[0][i - 1] + moneyStream[i][3]);
+            if (finalObject.series[0][i] < finalObject.min) {
+                finalObject.min = finalObject.series[0][i];
+            }
+            if (finalObject.series[0][i] > finalObject.max) {
+                finalObject.max = finalObject.series[0][i];
+            }
+        }
+
+        if (finalObject.labels.length > 40) {
+            for (let i = 0; i < finalObject.labels.length; i++) {
+                finalObject.labels[i] = '';
+            }
+        }
+        
+        return finalObject;
+    }
 
     ngOnInit(){
         
         this.selectStatistics();
-  
-        let dataSales = {
-          labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM'],
-          series: [
-            this.ordersFromToday()
-          ]
-        };
-  
-        let optionsSales = {
-          low: 0,
-          high: (this.ordersFromToday())['total'] + 5 ,
-          showArea: true,
-          height: "245px",
-          axisX: {
-            showGrid: false,
-          },
-          lineSmooth: Chartist.Interpolation.simple({
-            divisor: 3
-          }),
-          showLine: true,
-          showPoint: false,
-        };
-  
-        let responsiveSales: any[] = [
-          ['screen and (max-width: 640px)', {
+        console.log(this.getMainProfit());
+        let dataMoneyStream = this.getMainProfit();
+        
+        /*{
+            labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM'],
+            series: [
+              this.ordersFromToday()
+            ]
+          };*/
+        
+        
+    
+          let optionsMoneyStream = {
+            low: this.getMainProfit().min - 5,
+            high: this.getMainProfit().max + 5 ,
+            showArea: true,
+            height: "245px",
             axisX: {
-              labelInterpolationFnc: function (value) {
-                return value[0];
+              showGrid: false,
+            },
+            lineSmooth: Chartist.Interpolation.simple({
+              divisor: 3
+            }),
+            showLine: true,
+            showPoint: false,
+          };
+    
+          let responsiveMoneyStream: any[] = [
+            ['screen and (max-width: 640px)', {
+              axisX: {
+                labelInterpolationFnc: function (value) {
+                  return value[0];
+                }
               }
-            }
-          }]
-        ];
-  
-        new Chartist.Line('#chartHours', dataSales, optionsSales, responsiveSales);
-              
-      }
+            }]
+          ];
+    
+          new Chartist.Line('#chartMoney', dataMoneyStream, optionsMoneyStream, responsiveMoneyStream);
+        
+    }
   
 }

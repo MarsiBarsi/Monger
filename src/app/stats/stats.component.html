@@ -1,41 +1,62 @@
 <div class="container-fluid">
     <div class="row">
         <div class="row">
-
             <div class="col-md-6">
                 <div class="card">
                     <div class="header">
                         <h4 class="title">Самые продаваемые товары</h4>        
                     </div>
-                    
-                        <ngx-charts-advanced-pie-chart
+                    <ngx-charts-advanced-pie-chart
                         [view]="view"
                         [scheme]="colorScheme"
                         [results]="data"
                         [gradient]="gradient"
                         (select)="onSelect($event)">
-                        </ngx-charts-advanced-pie-chart>
+                    </ngx-charts-advanced-pie-chart>
                 </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="card">
-                    
                     <div class="header">
-                        <h4 class="title">Статистика продаж товаров</h4>
-                        
+                        <h4 class="title">Общая статистика</h4>        
                     </div>
                     <div class="content">
-                        <div id="chartHours" class="ct-chart"></div>
-                        <div class="footer">
-                            <div class="chart-legend">
-                                <i class="fa fa-circle text-info"></i> Покупатели
+                        <div *ngFor="let elem of wholeStatistics">
+                            <div class="card col-md-3">
+                                <div class="text-center">
+                                    <p>{{elem['mes']}}</p>
+                                </div>
+                                <h3 class="text-right">{{elem['value']}}</h3>
+                            </div>
+                            <div class="card col-md-1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+        </div>
+
+
+        <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">График прибыли</h4>
+                        </div>
+                        <div class="content">
+                            <div id="chartMoney" class="ct-chart"></div>
+                            <div class="footer">
+                                <div class="chart-legend">
+                                    <i class="fa fa-circle text-info"></i>Баланс
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
     </div>
 </div>
