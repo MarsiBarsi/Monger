@@ -16,6 +16,8 @@ import { StorageComponent }   from './storage/storage.component';
 import { FeedbackComponent }   from './feedback/feedback.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { environment } from '../environments/environment';
+
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 

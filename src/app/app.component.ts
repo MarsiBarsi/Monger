@@ -1,6 +1,18 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms/src/model';
 
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
+interface Product {
+  id : number,
+  name : string,
+  price : number,
+  amount : number
+}
+
+
 
 declare let $:any;
 
@@ -37,5 +49,26 @@ export let amounts : Object = {
  
 
 export class AppComponent{
- 
+  productsCollection : AngularFirestoreCollection<Product>;
+  prods : Observable<Product[]>;
+  snapshot : any;
+
+  constructor(private afs: AngularFirestore) {};
+
+  ngOnInit() {
+    this.productsCollection = this.afs.collection('amounts');
+    this.prods = this.productsCollection.valueChanges();
+    this.snapshot = this.productsCollection.snapshotChanges();
+
+
+    this.prods.forEach(element => {
+      if ( element[0]) {
+        amounts = element[0];
+      }
+      console.log(element[0]);
+    });
+  }
+
+  
+
 }

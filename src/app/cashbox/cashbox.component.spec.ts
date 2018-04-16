@@ -9,151 +9,72 @@ describe('CashboxComponent', () => {
     cashboxTest = new CashboxComponent();
   });
 
-
-  /*
-  describe('Adding to order', () => {
+  describe('Adding new operation', () => {
     
-    it('1. should add a product in receipt', () => {
+    it('1. should add a new operation to the money stream', () => {
+      let savedAmount = amounts['moneyStream'];
+
+      let savedName = 'test name';
+      let savedBalance = '10';
+
+      let nameOfOperation = { value : savedName}
+      let changeOfBalance = { value : savedBalance };
       
-      let product = { innerHTML : '1'};
-      let idInListTest = Number(product['innerHTML']) - 1;
       
-      products[idInListTest][3] = 10;
-
-      serviceTest.plusProduct(product);
-      
-      expect(serviceTest.productsInOrder[idInListTest] > 0).toEqual(true);
-
-    });
-
-    it('2. should inscrease the sum of the order', () => {
-      let savedSum = serviceTest.sumOfOrder;
-
-      let product = {'innerHTML' : '1'};
-      let idInListTest = Number(product['innerHTML']) - 1;
-      
-      products[idInListTest][3] = 10;
-
-      serviceTest.plusProduct(product);
-      
-      expect(serviceTest.sumOfOrder).toEqual(savedSum + products[idInListTest][2]);
-    });
-
-    it('3. should descrease the amount of the products', () => {
-      let amountTest = 10;
-
-      let product = {'innerHTML' : '1'};
-      let idInListTest = Number(product['innerHTML']) - 1;
-      
-      products[idInListTest][3] = amountTest;
-
-      serviceTest.plusProduct(product);
-      
-      expect(products[idInListTest][3]).toEqual(amountTest - 1);
-    });
-
-  }); // end of adding
-
-  describe('Minus product', () => {
-
-    it('1. should increase the amount of the products', () => {
-      let amountTest = 10;
-
-      let product = {'innerHTML' : '1'};
-      let idInListTest = Number(product['innerHTML']) - 1;
-      
-      products[idInListTest][3] = amountTest;
-      serviceTest.productsInOrder[idInListTest] = 5;
-
-      serviceTest.minusProduct(product);
-      
-      expect(products[idInListTest][3]).toEqual(amountTest + 1);
-    });
-
-    it('2. should decrease the sum of the order', () => {
-      let savedSum = serviceTest.sumOfOrder;
-
-      let product = {'innerHTML' : '1'};
-      let idInListTest = Number(product['innerHTML']) - 1;
-      
-      products[idInListTest][3] = 10;
-      serviceTest.productsInOrder[idInListTest] = 5;
-
-      serviceTest.minusProduct(product);
-      
-      expect(serviceTest.sumOfOrder).toEqual(savedSum - products[idInListTest][2]);
-    });
-
-    it('3. should remove the product from receipt', () => {
-      let amountTest = 5;
-      let product = { innerHTML : '1'};
-      let idInListTest = Number(product['innerHTML']) - 1;
-      
-      products[idInListTest][3] = 10;
-      serviceTest.productsInOrder[idInListTest] = amountTest;
-
-      serviceTest.minusProduct(product);
-      
-      expect(serviceTest.productsInOrder[idInListTest]).toEqual(amountTest - 1);
-
-    });
-
-    it('4. should do nothing if the product is not in receipt', () => {
-      
-      let product = { innerHTML : '1'};
-      let idInListTest = Number(product['innerHTML']) - 1;
-      
-      let savedAmountOfProduct = 10;
-      products[idInListTest][3] = savedAmountOfProduct;
-
-
-      serviceTest.productsInOrder[idInListTest] = 0;
-
-      serviceTest.minusProduct(product);
-      
-      expect(products[idInListTest][3]).toEqual(savedAmountOfProduct);
-
-    });
-
-  });
-
-  describe('Canceling', () => {
-    it('1. should cancel the whole order', () => {
-      
-      serviceTest.productsInOrder = [10,20];
-
-      serviceTest.cancel();
-      
-      expect(serviceTest.productsInOrder).toEqual([]);
-
-    });
-
-    it('2. should set a zero sum of order', () => {
-      
-      serviceTest.sumOfOrder = 500;
-      
-      serviceTest.cancel();
-      
-      expect(serviceTest.sumOfOrder).toEqual(0);
-
-    });
-
-  });
-
-  describe('Ordering', () => {
-    it('1. should get ready to new order', () => {
-      
-      serviceTest.productsInOrder = [10,20];
-      serviceTest.sumOfOrder = 500;
-
-      serviceTest.order();
-      
-      expect(serviceTest.productsInOrder).toEqual([]);
-      expect(serviceTest.sumOfOrder).toEqual(0);
-    });
+      cashboxTest.addNewOperation(nameOfOperation, changeOfBalance);
     
+      expect(moneyStream[savedAmount][2]).toEqual(savedName);
+      expect(moneyStream[savedAmount][3]).toEqual(~~savedBalance);
+      expect(amounts['moneyStream']).toEqual(savedAmount + 1)
+    });
+
+    it('2. should get ready to the new adding', () => {
+      
+      let savedName = 'test name';
+      let savedBalance = '10';
+
+      let nameOfOperation = { value : savedName}
+      let changeOfBalance = { value : savedBalance };
+      
+      cashboxTest.addNewOperation(nameOfOperation, changeOfBalance);
+
+      expect(nameOfOperation.value).toEqual('');
+      expect(changeOfBalance.value).toEqual('');
+
+    });
+
+    it('3. should inscrease income by positive operation', () => {
+      let savedIncome = cashboxTest.income;
+
+      let savedName = 'test name';
+      let savedBalance = '10';
+
+      let nameOfOperation = { value : savedName}
+      let changeOfBalance = { value : savedBalance };
+      
+      cashboxTest.addNewOperation(nameOfOperation, changeOfBalance);
+      
+      expect(cashboxTest.income).toEqual(savedIncome + Number(savedBalance));
+
+    });
+
+    it('3. should insrease expense by negative operation', () => {
+      let savedExpense = cashboxTest.expense;
+
+      let savedName = 'test name';
+      let savedBalance = '-10';
+
+      let nameOfOperation = { value : savedName}
+      let changeOfBalance = { value : savedBalance };
+      
+      cashboxTest.addNewOperation(nameOfOperation, changeOfBalance);
+      
+      expect(cashboxTest.expense).toEqual(savedExpense + (-Number(savedBalance)));
+
+    });
+
 
   });
-  */
+  
 });
 

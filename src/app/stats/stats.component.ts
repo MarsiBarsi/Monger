@@ -6,7 +6,7 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 export let data = [];
 
-
+declare let $:any;
 
 export declare interface TableData {
     headerRow: string[];
@@ -96,7 +96,7 @@ export class StatsComponent implements OnInit{
           min : 0,
           max : 0
         };
-        console.log(moneyStream);
+        //console.log(moneyStream);
 
         finalObject.series[0][-1] = 0; // for the first iteration
         for (let i = 0; i < moneyStream.length; i++) {

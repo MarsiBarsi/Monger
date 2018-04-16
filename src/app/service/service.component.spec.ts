@@ -150,6 +150,33 @@ describe('ServiceComponent', () => {
       expect(serviceTest.sumOfOrder).toEqual(0);
     });
 
+    it('2. should add new elem to the list of orders correctly', () => {
+      let ordersSaved = amounts['orders'];
+
+      serviceTest.productsInOrder = [10,20];
+      serviceTest.sumOfOrder = 500;
+
+      serviceTest.order();
+      
+      expect(amounts['orders']).toEqual(ordersSaved + 1);
+      expect(orders[ordersSaved][2]).toEqual({ 1 : 10, 2: 20});
+    });
+
+    it('3. should add new elem to the money stream correctly', () => {
+      let amountSaved = amounts['moneyStream'];
+      
+      let savedSum = serviceTest.sumOfOrder = 500;
+      serviceTest.productsInOrder = [10,20];
+      
+      serviceTest.order();
+      
+      expect(amounts['moneyStream']).toEqual(amountSaved + 1);
+      expect(moneyStream[amountSaved][3]).toEqual(savedSum);
+    });
+
+
   });
+
+  
 });
 
