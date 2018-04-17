@@ -17,8 +17,8 @@ declare interface CashboxTableData {
     templateUrl: 'cashbox.component.html'
 })
 
-export class CashboxComponent{
-    
+export class CashboxComponent{    
+    statusesWrong = false;
 
     moneyStream = moneyStream;
     public cashboxTable: CashboxTableData;
@@ -43,22 +43,33 @@ export class CashboxComponent{
          
     };
 
-    addNewOperation(nameOfOperation, changeOfBalance : HTMLInputElement) {
-        moneyStream.push([
-            ++amounts['moneyStream'],
-            new Date(),
-            nameOfOperation.value,
-            Number(changeOfBalance.value)
-        ]);
-        
-        if (Number(changeOfBalance.value) > 0) {
-            this.income += Number(changeOfBalance.value);
-        } else {
-            this.expense += -(Number(changeOfBalance.value));
-        }
+    showNotification() {
+        this.statusesWrong = true;
+        setTimeout( () => {
+            this.statusesWrong = false;
+        },2000);
+    };
 
-        nameOfOperation.value = '';
-        changeOfBalance.value = '';
+    addNewOperation(nameOfOperation, changeOfBalance : HTMLInputElement) {
+        if (!nameOfOperation.value) {
+            this.showNotification();
+        } else {
+            moneyStream.push([
+                ++amounts['moneyStream'],
+                new Date(),
+                nameOfOperation.value,
+                Number(changeOfBalance.value)
+            ]);
+            
+            if (Number(changeOfBalance.value) > 0) {
+                this.income += Number(changeOfBalance.value);
+            } else {
+                this.expense += -(Number(changeOfBalance.value));
+            }
+    
+            nameOfOperation.value = '';
+            changeOfBalance.value = '';
+        }
 
     };
 

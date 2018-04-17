@@ -4,7 +4,10 @@ import { TableData } from '../stats/stats.component'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { products, amounts } from '../app.component'
 
+
 declare let $:any;
+
+
 
 interface DataRow {
     id: number,
@@ -26,9 +29,11 @@ declare interface StorageTableData {
 
 
 export class StorageComponent implements OnInit {
-    
+    public statusesWrong : boolean = false;
+
     public storageTable: StorageTableData;
     
+
     ngOnInit(){
 
         this.storageTable = {
@@ -37,17 +42,27 @@ export class StorageComponent implements OnInit {
         };
         
     };
+    showNotification() {
+        this.statusesWrong = true;
+        setTimeout( () => {
+            this.statusesWrong = false;
+        },2000);
+    };
 
     addNewProduct(nameOfProduct, priceOfProduct,amountOfProducts : HTMLInputElement) {
-        products.push(
-            [++amounts['products'],
-                nameOfProduct.value,
-                Number(priceOfProduct.value),
-                Number(amountOfProducts.value)]);
+        if (!nameOfProduct.value) {
+            this.showNotification();
+        } else {
+            products.push(
+                [++amounts['products'],
+                    nameOfProduct.value,
+                    Number(priceOfProduct.value),
+                    Number(amountOfProducts.value)]);
 
-        nameOfProduct.value = '';
-        priceOfProduct.value = '';
-        amountOfProducts.value = '';
+            nameOfProduct.value = '';
+            priceOfProduct.value = '';
+            amountOfProducts.value = '';
+        }
     }
 
     deleteProduct(elem : HTMLElement) {
@@ -57,9 +72,11 @@ export class StorageComponent implements OnInit {
     changeProduct(indexOfProduct, newPriceOfProduct,newAmountOfProducts : HTMLInputElement) {
         products[~~indexOfProduct.value - 1][2] = Number(newPriceOfProduct.value);
         products[~~indexOfProduct.value - 1][3] = Number(newAmountOfProducts.value);
-
+        
         indexOfProduct.value = '';
         newPriceOfProduct.value = '';
         newAmountOfProducts.value = '';
     }
+
+    
 }

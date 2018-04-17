@@ -60,7 +60,7 @@ describe('StorageComponent', () => {
       expect(amountOfProducts['value']).toEqual('');
 
     });
-
+    
   }); // end of adding
 
   describe('Changing', () => {

@@ -19,9 +19,7 @@ const iconClasses : string[] = [
 
 export class DashboardComponent implements OnInit{
   
-  public menuItems: any[] = [
-    
-  ];
+  public menuItems: any[] = [ ];
 
   ordersFromToday() {
     let now : Date = new Date();
@@ -60,51 +58,52 @@ export class DashboardComponent implements OnInit{
     return outAmount;
   }
 
-  ngOnInit(){
-      for (let i = 1; i < ROUTES.length - 1; i++) {
-        this.menuItems[i - 1] = {
-          iconClass : iconClasses[i - 1],
-          icon : ROUTES[i].icon,
-          path : '../' + ROUTES[i].path,
-          title : ROUTES[i].title
-        };
-      }
-
-      let dataSales = {
-        labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM'],
-        series: [
-          this.ordersFromToday()
-        ]
+  menuCreating() {
+    for (let i = 1; i < ROUTES.length - 1; i++) {
+      this.menuItems[i - 1] = {
+        iconClass : iconClasses[i - 1],
+        icon : ROUTES[i].icon,
+        path : '../' + ROUTES[i].path,
+        title : ROUTES[i].title
       };
-
-      let optionsSales = {
-        low: 0,
-        high: (this.ordersFromToday())['total'] + 5 ,
-        showArea: true,
-        height: "245px",
-        axisX: {
-          showGrid: false,
-        },
-        lineSmooth: Chartist.Interpolation.simple({
-          divisor: 3
-        }),
-        showLine: true,
-        showPoint: false,
-      };
-
-      let responsiveSales: any[] = [
-        ['screen and (max-width: 640px)', {
-          axisX: {
-            labelInterpolationFnc: function (value) {
-              return value[0];
-            }
-          }
-        }]
-      ];
-
-      new Chartist.Line('#chartHours', dataSales, optionsSales, responsiveSales);
-            
     }
+  }
 
+  ngOnInit(){
+    this.menuCreating();
+  
+    let dataSales = {
+      labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM'],
+      series: [
+        this.ordersFromToday()
+      ]
+    };
+  
+    let optionsSales = {
+      low: 0,
+      high: (this.ordersFromToday())['total'] + 5 ,
+      showArea: true,
+      height: "245px",
+      axisX: {
+        showGrid: false,
+      },
+      lineSmooth: Chartist.Interpolation.simple({
+        divisor: 3
+      }),
+      showLine: true,
+      showPoint: false,
+    };
+    
+    let responsiveSales: any[] = [
+      ['screen and (max-width: 640px)', {
+        axisX: {
+          labelInterpolationFnc: function (value) {
+            return value[0];
+          }
+        }
+      }]
+    ];
+    new Chartist.Line('#chartHours', dataSales, optionsSales, responsiveSales); 
+  }
 
 }

@@ -4,7 +4,7 @@ import { amounts,orders, products, moneyStream } from '../app.component';
 
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 
-export let data = [];
+export let data : Array<Object> = [];
 
 declare let $:any;
 
@@ -82,9 +82,6 @@ export class StatsComponent implements OnInit{
         
     }
     
-    ordersFromToday() {
-        return [1,2,3,4,5,6]
-    }
 
     getMainProfit() {
         
@@ -122,45 +119,33 @@ export class StatsComponent implements OnInit{
     ngOnInit(){
         
         this.selectStatistics();
-        console.log(this.getMainProfit());
+        
         let dataMoneyStream = this.getMainProfit();
-        
-        /*{
-            labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM'],
-            series: [
-              this.ordersFromToday()
-            ]
-          };*/
-        
-        
+                
+        let optionsMoneyStream = {
+          low: this.getMainProfit().min - 5,
+          high: this.getMainProfit().max + 5 ,
+          showArea: true,
+          height: "245px",
+          axisX: {
+            showGrid: false,
+          },
+          lineSmooth: Chartist.Interpolation.simple({
+            divisor: 3
+          }),
+          showLine: true,
+          showPoint: false,
+        };
     
-          let optionsMoneyStream = {
-            low: this.getMainProfit().min - 5,
-            high: this.getMainProfit().max + 5 ,
-            showArea: true,
-            height: "245px",
+        let responsiveMoneyStream: any[] = [
+          ['screen and (max-width: 640px)', {
             axisX: {
-              showGrid: false,
-            },
-            lineSmooth: Chartist.Interpolation.simple({
-              divisor: 3
-            }),
-            showLine: true,
-            showPoint: false,
-          };
-    
-          let responsiveMoneyStream: any[] = [
-            ['screen and (max-width: 640px)', {
-              axisX: {
-                labelInterpolationFnc: function (value) {
-                  return value[0];
-                }
+              labelInterpolationFnc: function (value) {
+                return value[0];
               }
-            }]
-          ];
-    
-          new Chartist.Line('#chartMoney', dataMoneyStream, optionsMoneyStream, responsiveMoneyStream);
-        
+            }
+          }]
+        ];
+        new Chartist.Line('#chartMoney', dataMoneyStream, optionsMoneyStream, responsiveMoneyStream);
     }
-  
 }

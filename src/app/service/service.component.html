@@ -65,7 +65,10 @@
                     </tbody>
                 </table>
                <div class="content">
-                    <p>Итого: {{sumOfOrder}} р.</p>
+                    <p>
+                        Итого: {{sumOfOrder}} р. | Посетитель платит: <input type="number" id="oddMoney" [(ngModel)]="moneyOfCustomer" > р. | Сдача: {{moneyOfCustomer - sumOfOrder}} р.
+                    </p>
+                   
                     <button class="btn btn-success btn-lg" (click)="order()">Оформить заказ</button>
                     
                     <button class="btn btn-danger btn-lg" (click)="cancel()">Отменить заказ</button>

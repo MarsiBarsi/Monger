@@ -10,6 +10,8 @@ import { products,orders,moneyStream, amounts } from '../app.component'
 
 export class ServiceComponent implements OnInit{
     sumOfOrder : number = 0;
+    moneyOfCustomer : number = 0;
+    
     productsInOrder : Array<number> = [
         
     ]; // productsInOrder[id_товара] = кол-во товара
@@ -32,6 +34,7 @@ export class ServiceComponent implements OnInit{
     }
 
     plusProduct(artikul : HTMLElement) {
+        console.log(this.moneyOfCustomer);
         let idInList : number = Number(artikul.innerHTML) - 1;
         if (products[idInList][3] > 0) { // если кол-во товара > 0
             products[idInList][3]--;
@@ -49,7 +52,7 @@ export class ServiceComponent implements OnInit{
 
     order() {
         // заказ
-        let soldProducts = new Object();
+        let soldProducts : Object = new Object();
         
         for (let i = 0; i < this.productsInOrder.length; i++) {
             if (this.productsInOrder[i]) {
@@ -74,6 +77,7 @@ export class ServiceComponent implements OnInit{
         // готовимся к следующему заказу
         this.sumOfOrder = 0;
         this.productsInOrder = [];
+        this.moneyOfCustomer = 0;
     }
 
     cancel() {
@@ -82,5 +86,6 @@ export class ServiceComponent implements OnInit{
         });
         this.productsInOrder = [];
         this.sumOfOrder = 0;
+        this.moneyOfCustomer = 0;
     }
 }
