@@ -4,14 +4,7 @@ import { FormGroup } from '@angular/forms/src/model';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-
-interface Product {
-  id : number,
-  name : string,
-  price : number,
-  amount : number
-}
-
+import { query } from '@angular/animations';
 
 
 declare let $:any;
@@ -20,7 +13,23 @@ export let products : Array<[number,string,number,number]> = [
   // [id,name,price,amount]
   [1, 'товар 1', 4, 12],
   [2, 'товар 2', 23, 15],
-];
+]; 
+
+interface Product {
+  id : number,
+  name : string,
+  price : number,
+  amount : number
+}
+/*
+export let products : Array<Product> = [
+  {
+    id : 1,
+    name : 'товар 1',
+    price : 4,
+    amount : 15
+  }
+];*/
 
 export let moneyStream : Array<[number,Date,string,number]> = [
   // [id,date,operationName, + or - money]
@@ -49,6 +58,8 @@ export let amounts : Object = {
  
 
 export class AppComponent{
+  
+
   productsCollection : AngularFirestoreCollection<Product>;
   prods : Observable<Product[]>;
   snapshot : any;
@@ -56,14 +67,17 @@ export class AppComponent{
   constructor(private afs: AngularFirestore) {};
 
   ngOnInit() {
-    this.productsCollection = this.afs.collection('amounts');
+
+
+
+    this.productsCollection = this.afs.collection('products');
     this.prods = this.productsCollection.valueChanges();
     this.snapshot = this.productsCollection.snapshotChanges();
 
 
     this.prods.forEach(element => {
-      if ( element[0]) {
-        amounts = element[0];
+      if (element[0]) {
+        products.push(element[0][0]);
       }
       console.log(element[0]);
     });

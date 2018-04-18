@@ -60,6 +60,20 @@ describe('StorageComponent', () => {
       expect(amountOfProducts['value']).toEqual('');
 
     });
+
+    it('4. should show notification if name of product is empty', () => {
+      
+      
+      let [nameOfProduct,priceOfProduct,amountOfProducts] = [{},{},{}];
+
+      nameOfProduct['value'] = '';
+      priceOfProduct['value'] = '5';
+      amountOfProducts['value'] = 'test';
+      storageTest.addNewProduct(nameOfProduct,priceOfProduct,amountOfProducts);
+      
+      expect(storageTest.statusesWrong).toBeTruthy();
+
+    });
     
   }); // end of adding
 

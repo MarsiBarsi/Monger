@@ -9,13 +9,6 @@ declare let $:any;
 
 
 
-interface DataRow {
-    id: number,
-    name: string,
-    price: number,
-    amuount: number
-}
-
 declare interface StorageTableData {
     headerRow: string[];
     dataRows: Array<[number,string,number,number]>;
