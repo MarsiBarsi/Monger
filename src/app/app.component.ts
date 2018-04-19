@@ -5,6 +5,7 @@ import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { query } from '@angular/animations';
+import { createNgModule } from '@angular/compiler/src/core';
 
 
 declare let $:any;
@@ -73,12 +74,33 @@ export let orders : Array<Order> = [
   }
 ];
 
-export let amounts : Object = {
+interface AmountCounter {
+  products : number,
+  moneyStream : number,
+  orders : number
+} 
+
+export let amounts : AmountCounter = {
   products : 2,
   moneyStream : 2,
   orders : 2
 }
 
+
+
+interface FireCrm {
+  amounts : AmountCounter,
+  products : Array<Product>,
+  moneyStream : Array<MoneyOperation>,
+  orders : Array<Order>
+}
+
+export let crmDoc : AngularFirestoreDocument<FireCrm>;
+export let crm : Observable<FireCrm>;
+
+export let updateFire = () => {
+  crmDoc.update({products : products,amounts : amounts, orders : orders, moneyStream : moneyStream});
+}
 
 @Component({
   selector: 'app-root',
@@ -89,20 +111,42 @@ export let amounts : Object = {
 
 export class AppComponent{
   
+  
+
 
   productsCollection : AngularFirestoreCollection<Product>;
   prods : Observable<Product[]>;
   snapshot : any;
 
   constructor(private afs: AngularFirestore) {};
-
+  
   ngOnInit() {
+    
+    crmDoc = this.afs.doc('crm/2O6FeLOoFWUtbdOkJDWR');
+    crm = crmDoc.valueChanges();
+    console.log(products);
+    updateFire();
 
-    this.productsCollection = this.afs.collection('products');
+    crm.subscribe( elem => {
+      products = elem.products;
+      orders = elem.orders;
+      moneyStream = elem.moneyStream;
+      amounts = elem.amounts;
+    });
+
+    /*this.productsCollection = this.afs.collection('crm');
     this.prods = this.productsCollection.valueChanges();
     this.snapshot = this.productsCollection.snapshotChanges();
     
-    this.prods.subscribe(elem => console.log(elem));
+    let i = 0;
+    let arrayFromFire = [];
+
+    this.prods.subscribe(elem => {
+      arrayFromFire[0] = elem[0]; 
+      i++;
+    });
+    //console.log(arrayFromFire,i);
+
     
     /*for (let key in this.prods) {
       products.push(this.prods[key]);

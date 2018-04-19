@@ -1,8 +1,8 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ApplicationInitStatus } from '@angular/core';
 import { TableData } from '../stats/stats.component'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { products, amounts, Product } from '../app.component'
+import { products, amounts, Product, AppComponent,crmDoc,updateFire } from '../app.component'
 
 
 declare let $:any;
@@ -50,7 +50,7 @@ export class StorageComponent implements OnInit {
                     price :   Number(priceOfProduct.value),
                     amount :  Number(amountOfProducts.value)
                 });
-
+            updateFire();
             nameOfProduct.value = '';
             priceOfProduct.value = '';
             amountOfProducts.value = '';
@@ -64,12 +64,13 @@ export class StorageComponent implements OnInit {
             price : 0,
             amount : 0
         };
+        updateFire();
     }
 
     changeProduct(indexOfProduct, newPriceOfProduct,newAmountOfProducts : HTMLInputElement) {
         products[~~indexOfProduct.value - 1].price = Number(newPriceOfProduct.value);
         products[~~indexOfProduct.value - 1].amount = Number(newAmountOfProducts.value);
-
+        updateFire();
         indexOfProduct.value = '';
         newPriceOfProduct.value = '';
         newAmountOfProducts.value = '';
