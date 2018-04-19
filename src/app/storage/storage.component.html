@@ -174,8 +174,11 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let row of storageTable.dataRows" #name>
-                        <ng-container *ngIf="row[0]">
-                                <td *ngFor="let cell of row">{{cell}}</td>
+                        <ng-container *ngIf="row.id">
+                                <td >{{row.id}}</td>
+                                <td >{{row.name}}</td>
+                                <td >{{row.price}}</td>
+                                <td >{{row.amount}}</td>
                                 <td > <button class="btn btn-danger" (click)='deleteProduct(name)'>Удалить</button></td>
                         </ng-container>
                         

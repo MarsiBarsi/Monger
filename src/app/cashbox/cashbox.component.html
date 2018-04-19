@@ -80,12 +80,10 @@
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let row of cashboxTable.dataRows" #name>
-                                                <ng-container *ngIf="row[3] > 0">
-                                                    <td class="table-success" *ngFor="let cell of row">{{cell}}</td>
-                                                </ng-container>
-                                                <ng-container *ngIf="row[3] <= 0">
-                                                    <td class="table-danger" *ngFor="let cell of row">{{cell}}</td>
-                                                </ng-container>
+                                               <td [class.table-danger]="row.income < 0" [class.table-success]="row.income > 0">{{row.id}}</td>
+                                               <td [class.table-danger]="row.income < 0" [class.table-success]="row.income > 0">{{row.date}}</td>
+                                               <td [class.table-danger]="row.income < 0" [class.table-success]="row.income > 0">{{row.name}}</td>
+                                               <td [class.table-danger]="row.income < 0" [class.table-success]="row.income > 0">{{row.income}}</td>
                                             </tr>
                                         </tbody>
                                     </table>

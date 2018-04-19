@@ -27,7 +27,7 @@ export class ServiceComponent implements OnInit{
         let idInList : number = Number(artikul.innerHTML) - 1;
         if (this.productsInOrder[idInList] > 0) {
             this.productsInOrder[idInList]--;
-            this.sumOfOrder -= products[idInList][2];
+            this.sumOfOrder -= products[idInList].price;
             products[idInList][3]++;
             
         }
@@ -36,9 +36,9 @@ export class ServiceComponent implements OnInit{
     plusProduct(artikul : HTMLElement) {
         console.log(this.moneyOfCustomer);
         let idInList : number = Number(artikul.innerHTML) - 1;
-        if (products[idInList][3] > 0) { // если кол-во товара > 0
-            products[idInList][3]--;
-            this.sumOfOrder += products[idInList][2]; // прибавляем к сумме заказа
+        if (products[idInList].amount > 0) { // если кол-во товара > 0
+            products[idInList].amount--;
+            this.sumOfOrder += products[idInList].price; // прибавляем к сумме заказа
             if (this.productsInOrder[idInList] === undefined) {
                 this.productsInOrder[idInList] = 1;
             }
@@ -60,19 +60,19 @@ export class ServiceComponent implements OnInit{
             }
         }
 
-        orders.push([
-            ++amounts['orders'],
-            new Date(),
-            soldProducts
-        ]);
+        orders.push({
+            id : ++amounts['orders'],
+            date : new Date(),
+            products : soldProducts
+        });
         
         // денежная операция
-        moneyStream.push([
-            ++amounts['moneyStream'],
-            new Date(),
-            'Заказ #' + amounts['orders'],
-            this.sumOfOrder
-        ]);
+        moneyStream.push({
+           id : ++amounts['moneyStream'],
+           date : new Date(),
+           name : 'Заказ #' + amounts['orders'],
+           income : this.sumOfOrder
+        });
 
         // готовимся к следующему заказу
         this.sumOfOrder = 0;

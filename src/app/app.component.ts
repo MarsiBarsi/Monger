@@ -9,38 +9,68 @@ import { query } from '@angular/animations';
 
 declare let $:any;
 
-export let products : Array<[number,string,number,number]> = [
-  // [id,name,price,amount]
-  [1, 'товар 1', 4, 12],
-  [2, 'товар 2', 23, 15],
-]; 
 
-interface Product {
+export interface Product {
   id : number,
   name : string,
   price : number,
   amount : number
-}
-/*
+};
+
 export let products : Array<Product> = [
   {
     id : 1,
     name : 'товар 1',
     price : 4,
     amount : 15
+  },
+  {
+    id : 2,
+    name : 'товар 2',
+    price : 7,
+    amount : 5
   }
-];*/
-
-export let moneyStream : Array<[number,Date,string,number]> = [
-  // [id,date,operationName, + or - money]
-  [1,new Date(2018, 0, 1, 0, 0, 0, 0),'прибыль от продажи',100],
-  [2,new Date(2018, 0, 2, 0, 0, 0, 0),'выплата зарплат',-50]
 ];
 
-export let orders : Array<[number,Date,Object ]> = [
-  // [id,date, {productId : amount}]
-  [1,new Date(2018, 0, 1, 0, 0, 0, 0), { 1 : 2} ],
-  [2,new Date(), { 1 : 1, 2 : 3 } ]
+export interface MoneyOperation {
+  id : number,
+  date : Date,
+  name : string,
+  income : number
+};
+
+export let moneyStream : Array<MoneyOperation> = [
+  {
+    id : 1,
+    date : new Date(2018, 0, 1, 0, 0, 0, 0),
+    name : 'прибыль от продажи',
+    income : 100
+  },
+  {
+    id : 2,
+    date : new Date(2018, 0, 2, 0, 0, 0, 0),
+    name : 'выплата зарплат',
+    income : -50
+  }
+];
+
+interface Order {
+    id : number,
+    date : Date,
+    products : Object // product_id = amount
+}
+
+export let orders : Array<Order> = [
+  {
+    id : 1,
+    date : new Date(2018, 0, 1, 0, 0, 0, 0),
+    products : { 1 : 2 }
+  },
+  {
+    id : 2,
+    date : new Date(),
+    products : { 1 : 1, 2 : 3 }
+  }
 ];
 
 export let amounts : Object = {
@@ -68,19 +98,24 @@ export class AppComponent{
 
   ngOnInit() {
 
-
-
     this.productsCollection = this.afs.collection('products');
     this.prods = this.productsCollection.valueChanges();
     this.snapshot = this.productsCollection.snapshotChanges();
+    
+    this.prods.subscribe(elem => console.log(elem));
+    
+    /*for (let key in this.prods) {
+      products.push(this.prods[key]);
+      console.log(this.prods[key]);
+    } */
 
-
-    this.prods.forEach(element => {
+   /* this.prods.forEach(element => {
       if (element[0]) {
         products.push(element[0][0]);
       }
       console.log(element[0]);
-    });
+    }); */
+    
   }
 
   

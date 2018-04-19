@@ -3,12 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { TableData } from '../stats/stats.component'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 
-import { moneyStream,amounts } from '../app.component'
+import { moneyStream,amounts, MoneyOperation } from '../app.component'
 
 
 declare interface CashboxTableData {
     headerRow: string[];
-    dataRows: Array<[number,Date,string,number]>; // id,операция,доход или убыток
+    dataRows: Array<MoneyOperation>; // id,операция,доход или убыток
 }
 
 @Component({
@@ -32,12 +32,12 @@ export class CashboxComponent{
              headerRow: [ '#', 'дата', 'Операция', 'Баланс'],
              dataRows: moneyStream
          };
-
+         
          for (let elem of this.cashboxTable.dataRows) {
-             if (elem[3] > 0) {
-                 this.income += elem[3];
+             if (elem.income > 0) {
+                 this.income += elem.income;
              } else {
-                 this.expense += -(elem[3]);
+                 this.expense += -(elem.income);
              }         
          }
          
@@ -54,12 +54,12 @@ export class CashboxComponent{
         if (!nameOfOperation.value) {
             this.showNotification();
         } else {
-            moneyStream.push([
-                ++amounts['moneyStream'],
-                new Date(),
-                nameOfOperation.value,
-                Number(changeOfBalance.value)
-            ]);
+            moneyStream.push({
+                id : ++amounts['moneyStream'],
+                date : new Date(),
+                name : nameOfOperation.value,
+                income : Number(changeOfBalance.value)
+            });
             
             if (Number(changeOfBalance.value) > 0) {
                 this.income += Number(changeOfBalance.value);

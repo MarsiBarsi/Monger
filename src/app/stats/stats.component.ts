@@ -59,22 +59,22 @@ export class StatsComponent implements OnInit{
         let arrayOfProducts = [];
         
         orders.forEach( elem => {
-            for(let key in elem[2]) {
+            for(let key in elem.products) {
                 if( arrayOfProducts[Number(key)]) {
-                    arrayOfProducts[Number(key)] += Number(elem[2][key]);
+                    arrayOfProducts[Number(key)] += Number(elem.products[key]);
                 } 
                 else {
-                    arrayOfProducts[Number(key)] = Number(elem[2][key]);
+                    arrayOfProducts[Number(key)] = Number(elem.products[key]);
                 }
             }
         });
 
         let i = 0;
-        //console.log(arrayOfProducts);
+        console.log(arrayOfProducts);
         
         arrayOfProducts.forEach( (elem,index) => {
             data[i] = {
-                name : products[index - 1][1],
+                name : products[index - 1].name,
                 value : elem
             };
             i++;
@@ -97,8 +97,8 @@ export class StatsComponent implements OnInit{
 
         finalObject.series[0][-1] = 0; // for the first iteration
         for (let i = 0; i < moneyStream.length; i++) {
-            finalObject.labels.push(moneyStream[i][3]);
-            finalObject.series[0].push(finalObject.series[0][i - 1] + moneyStream[i][3]);
+            finalObject.labels.push(moneyStream[i].income);
+            finalObject.series[0].push(finalObject.series[0][i - 1] + moneyStream[i].income);
             if (finalObject.series[0][i] < finalObject.min) {
                 finalObject.min = finalObject.series[0][i];
             }
@@ -112,7 +112,7 @@ export class StatsComponent implements OnInit{
                 finalObject.labels[i] = '';
             }
         }
-        
+        console.log(finalObject);
         return finalObject;
     }
 

@@ -26,8 +26,8 @@ export class DashboardComponent implements OnInit{
     let outAmount : number[] = [0,0,0,0,0,0]; // 9-12-15-18-21-24
     
     orders.forEach( elem => {
-      if (Number(now) - Number(elem[1]) < 86400000) { // from the last day 
-        let hour : number = elem[1].getHours();
+      if (Number(now) - Number(elem.date) < 86400000) { // from the last day 
+        let hour : number = elem.date.getHours();
         if (hour <= 16) { // 9-12-15
           if (hour >= 14) {
             outAmount[2]++;

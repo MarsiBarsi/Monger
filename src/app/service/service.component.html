@@ -16,19 +16,19 @@
             </div>
         </div>
         <div *ngFor="let product of products">
-            <div class="col-lg-3 col-sm-6" *ngIf="product[0]">
+            <div class="col-lg-3 col-sm-6" *ngIf="product.id">
                 <div class="card">
                     <div class="content">
                         <div class="row">
                             <div class="col-xs-12">
                                 <label>Артикул: </label>
-                                <label #artikul>{{product[0]}}</label>
+                                <label #artikul>{{product.id}}</label>
                                 <div class="text-center" #name>
-                                    <h3 class="bg-success">{{product[1]}}</h3>
+                                    <h3 class="bg-success">{{product.name}}</h3>
                                     <label> Остаток:</label>
-                                    <label>{{product[3]}}</label>
+                                    <label>{{product.amount}}</label>
                                     <label>| Цена:</label>
-                                    <label>{{product[2]}}</label>
+                                    <label>{{product.price}}</label>
                                     <label> р.</label>
                                 
                                     <div>
@@ -58,9 +58,9 @@
                             <th>Цена</th>
                         </tr>
                         <tr *ngFor="let row of productsInOrder; let i = index">
-                            <td *ngIf="row">{{ products[i][1] }}</td>
+                            <td *ngIf="row">{{ products[i].name }}</td>
                             <td *ngIf="row">{{ row }}</td>
-                            <td *ngIf="row">{{ row * products[i][2] }}</td>
+                            <td *ngIf="row">{{ row * products[i].price }}</td>
                         </tr>
                     </tbody>
                 </table>

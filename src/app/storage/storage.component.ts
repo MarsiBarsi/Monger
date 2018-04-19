@@ -2,16 +2,14 @@
 import { Component, OnInit } from '@angular/core';
 import { TableData } from '../stats/stats.component'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { products, amounts } from '../app.component'
+import { products, amounts, Product } from '../app.component'
 
 
 declare let $:any;
 
-
-
 declare interface StorageTableData {
     headerRow: string[];
-    dataRows: Array<[number,string,number,number]>;
+    dataRows : Array<Product>;
 }
 
 @Component({
@@ -25,15 +23,14 @@ export class StorageComponent implements OnInit {
     public statusesWrong : boolean = false;
 
     public storageTable: StorageTableData;
-    
 
     ngOnInit(){
-
+        
         this.storageTable = {
             headerRow: [ 'Артикул', 'Название товара', 'Стоимость', 'Остаток', ''],
             dataRows: products
         };
-        
+
     };
     showNotification() {
         this.statusesWrong = true;
@@ -47,10 +44,12 @@ export class StorageComponent implements OnInit {
             this.showNotification();
         } else {
             products.push(
-                [++amounts['products'],
-                    nameOfProduct.value,
-                    Number(priceOfProduct.value),
-                    Number(amountOfProducts.value)]);
+                {
+                    id : ++amounts['products'],
+                    name :  nameOfProduct.value,
+                    price :   Number(priceOfProduct.value),
+                    amount :  Number(amountOfProducts.value)
+                });
 
             nameOfProduct.value = '';
             priceOfProduct.value = '';
@@ -59,17 +58,22 @@ export class StorageComponent implements OnInit {
     }
 
     deleteProduct(elem : HTMLElement) {
-        products[~~(elem.children[0].innerHTML) - 1] = [0,'',0,0];
+        products[~~(elem.children[0].innerHTML) - 1] = {
+            id : 0,
+            name : '',
+            price : 0,
+            amount : 0
+        };
     }
 
     changeProduct(indexOfProduct, newPriceOfProduct,newAmountOfProducts : HTMLInputElement) {
-        products[~~indexOfProduct.value - 1][2] = Number(newPriceOfProduct.value);
-        products[~~indexOfProduct.value - 1][3] = Number(newAmountOfProducts.value);
-        
+        products[~~indexOfProduct.value - 1].price = Number(newPriceOfProduct.value);
+        products[~~indexOfProduct.value - 1].amount = Number(newAmountOfProducts.value);
+
         indexOfProduct.value = '';
         newPriceOfProduct.value = '';
         newAmountOfProducts.value = '';
     }
 
-    
+
 }
