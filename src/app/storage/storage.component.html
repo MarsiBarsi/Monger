@@ -1,164 +1,94 @@
 
 <div class="container-fluid">
     <div class="row">
-        
-        <div id='new_product'>
-            <p>Новый товар:</p>
-        </div>
-        <div class="col-lg-3 col-sm-6">
-            <div class="card">
-                <div class="content">
-                    <div class="row" >
-                        <div class="col-xs-12">
-                            <div>
-                                <p>Имя товара</p>
-                            </div>
-                            <div class="form-group has-success">     
-                                <input type="text" value="" class="form-control" #nameOfProduct/>
-                            </div>
-                            <div *ngIf="statusesWrong" class="card table-danger"> 
-                                <p>Задано пустое имя</p>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
+        <form [formGroup]="newProductForm">
+            <div id='new_product'>
+                <p>Новый товар:</p>
             </div>
-        </div>
-
-        <div class="col-lg-3 col-sm-6">
-            <div class="card">
-                <div class="content">
-    
-                    <div class="row" >
+            <div class="col-lg-3 col-sm-6" *ngFor="let elem of addFormInfo; let i = index">
+                <div class="card">
+                    <div class="content">
+                        <div class="row" >
                             <div class="col-xs-12">
                                 <div>
-                                    <p>Стоимость</p>
+                                    <p>{{elem.name}}</p>
                                 </div>
-                                
                                 <div class="form-group has-success">     
-                                    <input type="number" value="" class="form-control" #priceOfProduct/>
+                                    <input type="{{addFieldType(i)}}" value="" class="form-control" formControlName="{{elem.controlName}}"/>
+                                </div>
+                                <div *ngIf="isControlInvalid(newProductForm,elem.controlName)" class="card table-danger"> 
+                                    <p>{{elem.wrongMes}}</p>
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
+               
             <div class="col-lg-3 col-sm-6">
-                    <div class="card">
-                        <div class="content">
-                            <div class="row" >
-                                    <div class="col-xs-12">
-                                        <div>
-                                            <p>Количество</p>
-                                        </div>
-                                        
-                                        <div class="form-group has-success">     
-                                            <input type="number" value="" class="form-control" #amountOfProducts/>
-                                        </div>
-                                    </div>
+                <div class="card" (click)='addNewProduct()'>
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <div class="icon-big icon-warning text-center">
+                                    <i class="ti-arrow-circle-up"></i>
+                                </div>
+                            </div>
+                            <div class="col-xs-7">
+                                <div>
+                                    <p>Добавить товар</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
-                        <div class="card" (click)='addNewProduct(nameOfProduct, priceOfProduct, amountOfProducts)'>
-                            <div class="content">
-                                <div class="row">
-                                        <div class="col-xs-5">
-                                            <div class="icon-big icon-warning text-center">
-                                                <i class="ti-arrow-circle-up"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-7">
-                                            <div>
-                                                <p>Добавить товар</p>
-                                            </div>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                </div>
+            </div>
+        </form>
     </div>
 
     <div class="row">
-        
-        <div id='new_product'>
-            <p>Изменить товар:</p>
-        </div>
-        <div class="col-lg-3 col-sm-6">
-            <div class="card">
-                <div class="content">
-                    <div class="row" >
-                        <div class="col-xs-12">
-                            <div>
-                                <p>Артикул товара</p>
-                            </div>
-                            
-                            <div class="form-group has-success">     
-                                <input type="number" value="" class="form-control" #indexOfProduct/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <form [formGroup]="changeProductForm">
+            <div id='new_product'>
+                <p>Изменить товар:</p>
             </div>
-        </div>
-
-        <div class="col-lg-3 col-sm-6">
-            <div class="card">
-                <div class="content">
-    
-                    <div class="row" >
+            <div class="col-lg-3 col-sm-6" *ngFor="let elem of changeFormInfo">
+                <div class="card">
+                    <div class="content">
+                        <div class="row" >
                             <div class="col-xs-12">
                                 <div>
-                                    <p>Новая стоимость</p>
+                                    <p>{{elem.name}}</p>
                                 </div>
-                                
                                 <div class="form-group has-success">     
-                                    <input type="number" value="" class="form-control" #newPriceOfProduct/>
+                                    <input type="number" value="" class="form-control" formControlName="{{elem.controlName}}"/>
+                                </div>
+                                <div *ngIf="isControlInvalid(changeProductForm,elem.controlName)" class="card table-danger"> 
+                                    <p>{{elem.wrongMes}}</p>
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
             <div class="col-lg-3 col-sm-6">
-                    <div class="card">
-                        <div class="content">
-                            <div class="row" >
-                                <div class="col-xs-12">
-                                    <div>
-                                        <p>Новое количество</p>
-                                    </div>
-                                    
-                                    <div class="form-group has-success">     
-                                        <input type="number" value="" class="form-control" #newAmountOfProducts/>
-                                    </div>
+                <div class="card" (click)='changeProduct()'>
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <div class="icon-big icon-info text-center">
+                                    <i class="ti-pencil-alt"></i>
+                                </div>
+                            </div>
+                            <div class="col-xs-7">
+                                <div>
+                                    <p>Изменить товар</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
-                        <div class="card" (click)='changeProduct(indexOfProduct, newPriceOfProduct, newAmountOfProducts)'>
-                            <div class="content">
-                                <div class="row">
-                                        <div class="col-xs-5">
-                                            <div class="icon-big icon-info text-center">
-                                                <i class="ti-pencil-alt"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-7">
-                                            <div>
-                                                <p>Изменить товар</p>
-                                            </div>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                </div>
+            </div>
+        </form>
     </div>
 
     <div id='new_product'>
@@ -173,15 +103,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let row of storageTable.dataRows" #name>
+                    <tr *ngFor="let row of storageTable.dataRows; let i = index">
                         <ng-container *ngIf="row.id">
                                 <td >{{row.id}}</td>
                                 <td >{{row.name}}</td>
                                 <td >{{row.price}}</td>
                                 <td >{{row.amount}}</td>
-                                <td > <button class="btn btn-danger" (click)='deleteProduct(name)'>Удалить</button></td>
+                                <td > <button class="btn btn-danger" (click)='deleteProduct(i)'>Удалить</button></td>
                         </ng-container>
-                        
                     </tr>
                 </tbody>
             </table>

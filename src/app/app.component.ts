@@ -7,7 +7,6 @@ import 'rxjs/add/operator/map';
 import { query } from '@angular/animations';
 import { createNgModule } from '@angular/compiler/src/core';
 
-
 declare let $:any;
 
 
@@ -83,7 +82,7 @@ interface AmountCounter {
 export let amounts : AmountCounter = {
   products : 2,
   moneyStream : 2,
-  orders : 2
+  orders : 2,
 }
 
 
@@ -110,9 +109,6 @@ export let updateFire = () => {
  
 
 export class AppComponent{
-  
-  
-
 
   productsCollection : AngularFirestoreCollection<Product>;
   prods : Observable<Product[]>;
@@ -124,8 +120,8 @@ export class AppComponent{
     
     crmDoc = this.afs.doc('crm/2O6FeLOoFWUtbdOkJDWR');
     crm = crmDoc.valueChanges();
-    console.log(products);
-    updateFire();
+    //console.log(products);
+    //updateFire();
 
     crm.subscribe( elem => {
       products = elem.products;
@@ -133,33 +129,6 @@ export class AppComponent{
       moneyStream = elem.moneyStream;
       amounts = elem.amounts;
     });
-
-    /*this.productsCollection = this.afs.collection('crm');
-    this.prods = this.productsCollection.valueChanges();
-    this.snapshot = this.productsCollection.snapshotChanges();
-    
-    let i = 0;
-    let arrayFromFire = [];
-
-    this.prods.subscribe(elem => {
-      arrayFromFire[0] = elem[0]; 
-      i++;
-    });
-    //console.log(arrayFromFire,i);
-
-    
-    /*for (let key in this.prods) {
-      products.push(this.prods[key]);
-      console.log(this.prods[key]);
-    } */
-
-   /* this.prods.forEach(element => {
-      if (element[0]) {
-        products.push(element[0][0]);
-      }
-      console.log(element[0]);
-    }); */
-    
   }
 
   

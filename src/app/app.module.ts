@@ -15,6 +15,7 @@ import { StatsComponent }   from './stats/stats.component';
 import { CashboxComponent }   from './cashbox/cashbox.component';
 import { StorageComponent }   from './storage/storage.component';
 import { FeedbackComponent }   from './feedback/feedback.component';
+
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { environment } from '../environments/environment';
@@ -58,7 +59,8 @@ export const firebaseConfig = {
     DataTablesModule,
     NgxChartsModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

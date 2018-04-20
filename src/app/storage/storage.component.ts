@@ -1,9 +1,9 @@
 
 import { Component, OnInit, ApplicationInitStatus } from '@angular/core';
 import { TableData } from '../stats/stats.component'
-import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { FormControl, Validators, Form } from '@angular/forms'
 import { products, amounts, Product, AppComponent,crmDoc,updateFire } from '../app.component'
-
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 declare let $:any;
 
@@ -11,6 +11,14 @@ declare interface StorageTableData {
     headerRow: string[];
     dataRows : Array<Product>;
 }
+
+declare interface Inputs{
+    name : string,
+    controlName : string,
+    wrongCheck : string,
+    wrongMes : string
+}
+
 
 @Component({
     selector: 'storage-cmp',
@@ -20,11 +28,81 @@ declare interface StorageTableData {
 
 
 export class StorageComponent implements OnInit {
+    public newProductForm : FormGroup;
+    public changeProductForm : FormGroup;
+
+    constructor(private fb: FormBuilder){}
+
     public statusesWrong : boolean = false;
+
+    public addFormInfo : Inputs[] = [
+        {
+            name : 'Имя товара',
+            controlName : 'name',
+            wrongCheck : '',
+            wrongMes : 'Задано пустое имя'
+        },
+        {
+            name : 'Стоимость',
+            controlName : 'price',
+            wrongCheck : '',
+            wrongMes : 'стоимость не может быть отрицательной'
+        },
+        {
+            name : 'Количество',
+            controlName : 'amount',
+            wrongCheck : '',
+            wrongMes : 'количество не может быть отрицательным'
+        },
+    ];
+
+    public changeFormInfo : Inputs[] = [
+        {
+            name : 'Артикул товара',
+            controlName : 'id',
+            wrongCheck : '',
+            wrongMes : 'Артикул задан некорректно'
+        },
+        {
+            name : 'Новая стоимость',
+            controlName : 'newPrice',
+            wrongCheck : '',
+            wrongMes : 'стоимость не может быть отрицательной'
+        },
+        {
+            name : 'Новое количество',
+            controlName : 'newAmount',
+            wrongCheck : '',
+            wrongMes : 'количество не может быть отрицательным'
+        },
+    ];
 
     public storageTable: StorageTableData;
 
+    initForm(): void {
+        this.newProductForm = this.fb.group({
+            name: ['',[Validators.required]],
+            price : [null,[Validators.min(0)]],
+            amount : [null,[Validators.min(0)]]
+        });
+
+        this.changeProductForm = this.fb.group({
+            id: [null,[Validators.min(0),Validators.max(amounts.products)]],
+            newPrice : [null,[Validators.min(0)]],
+            newAmount : [null,[Validators.min(0)]]
+        });
+    }
+
+    isControlInvalid(form : FormGroup, controlName : string): boolean {
+        const control = form.controls[controlName];
+        
+        const result = control.invalid && control.touched;
+        
+        return result;
+    }
+
     ngOnInit(){
+        this.initForm();
         
         this.storageTable = {
             headerRow: [ 'Артикул', 'Название товара', 'Стоимость', 'Остаток', ''],
@@ -32,49 +110,48 @@ export class StorageComponent implements OnInit {
         };
 
     };
-    showNotification() {
-        this.statusesWrong = true;
-        setTimeout( () => {
-            this.statusesWrong = false;
-        },2000);
-    };
 
-    addNewProduct(nameOfProduct, priceOfProduct,amountOfProducts : HTMLInputElement) {
-        if (!nameOfProduct.value) {
-            this.showNotification();
-        } else {
-            products.push(
-                {
-                    id : ++amounts['products'],
-                    name :  nameOfProduct.value,
-                    price :   Number(priceOfProduct.value),
-                    amount :  Number(amountOfProducts.value)
-                });
-            updateFire();
-            nameOfProduct.value = '';
-            priceOfProduct.value = '';
-            amountOfProducts.value = '';
-        }
+    addNewProduct(): void {
+        products.push({
+            id : ++amounts['products'],
+            name : this.newProductForm.value.name,
+            price : Number(this.newProductForm.value.price),
+            amount : Number(this.newProductForm.value.amount)
+        });
+        //updateFire();
+        this.newProductForm.setValue({
+            name : [''],
+            price : [null],
+            amount : [null]
+        });  
     }
 
-    deleteProduct(elem : HTMLElement) {
-        products[~~(elem.children[0].innerHTML) - 1] = {
+    deleteProduct(indexOfProd : number): void {
+        products[indexOfProd] = {
             id : 0,
             name : '',
             price : 0,
             amount : 0
         };
-        updateFire();
+        //updateFire();
+    } 
+
+    changeProduct(): void {
+        products[Number(this.changeProductForm.value.id - 1)].price = Number(this.changeProductForm.value.newPrice);
+        products[Number(this.changeProductForm.value.id - 1)].amount = Number(this.changeProductForm.value.newAmount);
+        //updateFire();
+        this.changeProductForm.setValue({
+            id : [null],
+            newPrice : [null],
+            newAmount : [null]
+        });
     }
 
-    changeProduct(indexOfProduct, newPriceOfProduct,newAmountOfProducts : HTMLInputElement) {
-        products[~~indexOfProduct.value - 1].price = Number(newPriceOfProduct.value);
-        products[~~indexOfProduct.value - 1].amount = Number(newAmountOfProducts.value);
-        updateFire();
-        indexOfProduct.value = '';
-        newPriceOfProduct.value = '';
-        newAmountOfProducts.value = '';
+    addFieldType(index : number): string {
+        if (index == 0){
+            return 'text';
+        }
+        return 'number';
     }
-
 
 }

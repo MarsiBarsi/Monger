@@ -36,5 +36,9 @@ export const AppRoutes: Routes = [
     {
         path: 'feedback',
         component: FeedbackComponent
+    },
+    {
+        path : '**',
+        component : DashboardComponent
     }
 ]

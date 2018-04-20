@@ -1,12 +1,14 @@
 import { TestBed, async } from '@angular/core/testing';
 import { StorageComponent } from './storage.component'
 import { products, amounts } from '../app.component'
+import { FormBuilder } from '@angular/forms';
 
 
 describe('StorageComponent', () => { 
-  let storageTest; 
+  let storageTest;
+  let arg = new FormBuilder();
   beforeEach(() => {
-    storageTest = new StorageComponent();
+    storageTest = new StorageComponent(arg);
   });
   
   describe('Adding', () => {
@@ -107,13 +109,9 @@ describe('StorageComponent', () => {
     it('1. should delete the product correctly', () => {
       
       
-      let elemToDelete = {};
-      let zeroChild = {};
-      zeroChild['innerHTML'] = 1;
-
-      elemToDelete['children'] = [ zeroChild ]
+      let indexToDelete = 0;
       
-      storageTest.deleteProduct(elemToDelete);
+      storageTest.deleteProduct(indexToDelete);
       
       expect(products[0]).toEqual([0,'',0,0]);
       
