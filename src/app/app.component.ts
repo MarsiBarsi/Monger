@@ -54,7 +54,7 @@ export let moneyStream : Array<MoneyOperation> = [
   }
 ];
 
-interface Order {
+export interface Order {
     id : number,
     date : Date,
     products : Object // product_id = amount
@@ -73,7 +73,7 @@ export let orders : Array<Order> = [
   }
 ];
 
-interface AmountCounter {
+export interface AmountCounter {
   products : number,
   moneyStream : number,
   orders : number
@@ -84,8 +84,6 @@ export let amounts : AmountCounter = {
   moneyStream : 2,
   orders : 2,
 }
-
-
 
 interface FireCrm {
   amounts : AmountCounter,
@@ -121,7 +119,7 @@ export class AppComponent{
     crmDoc = this.afs.doc('crm/2O6FeLOoFWUtbdOkJDWR');
     crm = crmDoc.valueChanges();
     //console.log(products);
-    //updateFire();
+    updateFire();
 
     crm.subscribe( elem => {
       products = elem.products;

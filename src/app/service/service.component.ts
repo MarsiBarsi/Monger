@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,HostListener, Input } from '@angular/core';
 
-import { products,orders,moneyStream, amounts,updateFire } from '../app.component'
+import { products,orders,moneyStream, amounts,updateFire, Product } from '../app.component'
 
 @Component({
     selector: 'service-cmp',
@@ -9,6 +9,8 @@ import { products,orders,moneyStream, amounts,updateFire } from '../app.componen
 })
 
 export class ServiceComponent implements OnInit{
+    products : Product[] = products;
+
     sumOfOrder : number = 0;
     moneyOfCustomer : number = 0;
     
@@ -16,25 +18,23 @@ export class ServiceComponent implements OnInit{
         
     ]; // productsInOrder[id_товара] = кол-во товара
 
-    products = products;
     
 
     ngOnInit(){
         
     }
 
-    minusProduct(artikul : HTMLElement) {
+    minusProduct(artikul : HTMLElement): void {
         let idInList : number = Number(artikul.innerHTML) - 1;
         if (this.productsInOrder[idInList] > 0) {
             this.productsInOrder[idInList]--;
             this.sumOfOrder -= products[idInList].price;
-            products[idInList][3]++;
+            products[idInList].amount++;
             
         }
     }
 
-    plusProduct(artikul : HTMLElement) {
-        console.log(this.moneyOfCustomer);
+    plusProduct(artikul : HTMLElement): void {
         let idInList : number = Number(artikul.innerHTML) - 1;
         if (products[idInList].amount > 0) { // если кол-во товара > 0
             products[idInList].amount--;
@@ -51,7 +51,7 @@ export class ServiceComponent implements OnInit{
         //console.log(elem.children[0].innerHTML);
     }
 
-    order() {
+    order(): void {
         // заказ
         let soldProducts : Object = new Object();
         
@@ -83,7 +83,7 @@ export class ServiceComponent implements OnInit{
         this.moneyOfCustomer = 0;
     }
 
-    cancel() {
+    cancel(): void {
         this.productsInOrder.forEach( (elem,index) => {
             products[index][3] += elem;
         });

@@ -1,10 +1,14 @@
-
+import { BrowserModule } from '@angular/platform-browser'; 
 import { Component, OnInit } from '@angular/core';
 import { TableData } from '../stats/stats.component'
-import { FormGroup, FormControl, Validators } from '@angular/forms'
-
+import { FormGroup,  FormBuilder, FormControl, Validators } from '@angular/forms'
 import { moneyStream,amounts, MoneyOperation } from '../app.component'
 
+declare interface Inputs {
+    name : string,
+    controlName : string,
+    wrongMes : string
+}
 
 declare interface CashboxTableData {
     headerRow: string[];
@@ -20,6 +24,22 @@ declare interface CashboxTableData {
 export class CashboxComponent{    
     statusesWrong = false;
 
+    public CashboxForm : FormGroup;
+    constructor(private fb: FormBuilder){}
+
+    public CashboxFormInfo : Inputs[] = [
+        {
+            name : 'Название операции',
+            controlName : 'name',
+            wrongMes : 'Задано пустое имя'
+        },
+        {
+            name : 'Изменение баланса',
+            controlName : 'income',
+            wrongMes : 'введено некорректно'
+        }
+    ];
+
     moneyStream = moneyStream;
     public cashboxTable: CashboxTableData;
     
@@ -28,6 +48,11 @@ export class CashboxComponent{
 
     
     ngOnInit(){
+        this.CashboxForm = this.fb.group({
+            name: ['',[Validators.required]],
+            income : [null]
+        });
+
          this.cashboxTable = {
              headerRow: [ '#', 'дата', 'Операция', 'Баланс'],
              dataRows: moneyStream
@@ -43,33 +68,31 @@ export class CashboxComponent{
          
     };
 
-    showNotification() {
-        this.statusesWrong = true;
-        setTimeout( () => {
-            this.statusesWrong = false;
-        },2000);
-    };
+    isControlInvalid(form : FormGroup, controlName : string): boolean {
+        const control = form.controls[controlName];
+        const result = control.invalid && control.touched;
+        return result;
+    }
 
-    addNewOperation(nameOfOperation, changeOfBalance : HTMLInputElement) {
-        if (!nameOfOperation.value) {
-            this.showNotification();
+    addNewOperation() : void {
+        moneyStream.push({
+            id : ++amounts['moneyStream'],
+            date : new Date(),
+            name : this.CashboxForm.value.name,
+            income : Number(this.CashboxForm.value.income)
+        });
+        
+        if (Number(this.CashboxForm.value.income) > 0) {
+            this.income += Number(this.CashboxForm.value.income);
         } else {
-            moneyStream.push({
-                id : ++amounts['moneyStream'],
-                date : new Date(),
-                name : nameOfOperation.value,
-                income : Number(changeOfBalance.value)
-            });
-            
-            if (Number(changeOfBalance.value) > 0) {
-                this.income += Number(changeOfBalance.value);
-            } else {
-                this.expense += -(Number(changeOfBalance.value));
-            }
-    
-            nameOfOperation.value = '';
-            changeOfBalance.value = '';
+            this.expense += -(Number(this.CashboxForm.value.income));
         }
+
+        this.CashboxForm.setValue({
+            name : [''],
+            income : [null]
+        });  
+        
 
     };
 

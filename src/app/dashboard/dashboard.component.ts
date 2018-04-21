@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit{
   
   public menuItems: any[] = [ ];
 
-  ordersFromToday() {
+  ordersFromToday(): number[] {
     let now : Date = new Date();
     let outAmount : number[] = [0,0,0,0,0,0]; // 9-12-15-18-21-24
     
@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit{
     return outAmount;
   }
 
-  menuCreating() {
+  menuCreating(): void {
     for (let i = 1; i < ROUTES.length - 1; i++) {
       this.menuItems[i - 1] = {
         iconClass : iconClasses[i - 1],
