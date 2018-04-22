@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Component, OnInit, ApplicationInitStatus, Input } from '@angular/core';
 import { TableData } from '../stats/stats.component'
 import { FormControl, Validators, Form } from '@angular/forms'
-import { products, amounts,AmountCounter, Product, AppComponent,crmDoc,updateFire } from '../app.component'
+import { products, amounts,AmountCounter, Product, AppComponent,updateFire } from '../app.component'
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 declare let $:any;

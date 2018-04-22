@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms/src/model';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+
 import { query } from '@angular/animations';
 import { createNgModule } from '@angular/compiler/src/core';
 
@@ -92,9 +93,12 @@ interface FireCrm {
   orders : Array<Order>
 }
 
-export let crmDoc : AngularFirestoreDocument<FireCrm>;
-export let crm : Observable<FireCrm>;
-
+//export let crmDoc : AngularFirestoreDocument<FireCrm>;
+//export let crm : Observable<FireCrm>;
+export let updateFire = () => {
+  
+};
+/*
 export let updateFire = (): void => {
   crmDoc.update({
     products : products,
@@ -102,7 +106,7 @@ export let updateFire = (): void => {
     orders : orders,
     moneyStream : moneyStream
   });
-}
+}*/
 
 @Component({
   selector: 'app-root',
@@ -113,27 +117,38 @@ export let updateFire = (): void => {
 
 export class AppComponent{
 
-  productsCollection : AngularFirestoreCollection<Product>;
-  prods : Observable<Product[]>;
-  snapshot : any;
-
+  crmDoc : AngularFirestoreDocument<FireCrm>;
+  crm : Observable<FireCrm>;
+  sub : any;
   constructor(private afs: AngularFirestore) {};
   
   ngOnInit() {
     
-    crmDoc = this.afs.doc('crm/2O6FeLOoFWUtbdOkJDWR');
-    crm = crmDoc.valueChanges();
+    this.crmDoc = this.afs.doc('crm/2O6FeLOoFWUtbdOkJDWR');
+    this.crm = this.crmDoc.valueChanges();
     //console.log(products);
-    updateFire();
-
-    crm.subscribe( elem => {
+    // this.updateFire();
+    console.log(this.crm);
+    /*
+    this.sub = this.crm.subscribe(elem => {
       products = elem.products;
       orders = elem.orders;
       moneyStream = elem.moneyStream;
       amounts = elem.amounts;
     });
+    */
+    this.updateFire();
+    
   }
 
+  updateFire() {
+    setInterval(async () => this.crmDoc.set({
+      products : products,
+      amounts : amounts,
+      orders : orders,
+      moneyStream : moneyStream
+    }), 2000);
+  } 
   
 
 }
