@@ -46,25 +46,28 @@ export class CashboxComponent{
     income : number = 0
     expense : number = 0;
 
-    
-    ngOnInit(){
+    initForm(): void {
         this.CashboxForm = this.fb.group({
             name: ['',[Validators.required]],
             income : [null]
         });
-
-         this.cashboxTable = {
-             headerRow: [ '#', 'дата', 'Операция', 'Баланс'],
-             dataRows: moneyStream
-         };
-         
-         for (let elem of this.cashboxTable.dataRows) {
-             if (elem.income > 0) {
-                 this.income += elem.income;
-             } else {
-                 this.expense += -(elem.income);
-             }         
-         }
+    }
+    
+    ngOnInit(){
+        this.initForm();
+        
+        this.cashboxTable = {
+            headerRow: [ '#', 'дата', 'Операция', 'Баланс'],
+            dataRows: moneyStream
+        };
+        
+        for (let elem of this.cashboxTable.dataRows) {
+            if (elem.income > 0) {
+                this.income += elem.income;
+            } else {
+                this.expense += -(elem.income);
+            }         
+        }
          
     };
 
@@ -92,8 +95,6 @@ export class CashboxComponent{
             name : [''],
             income : [null]
         });  
-        
-
     };
 
 }

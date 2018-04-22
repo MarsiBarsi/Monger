@@ -16,7 +16,7 @@ describe('ServiceComponent', () => {
       let product = { innerHTML : '1'};
       let idInListTest = Number(product['innerHTML']) - 1;
       
-      products[idInListTest][3] = 10;
+      products[idInListTest].amount = 10;
 
       serviceTest.plusProduct(product);
       
@@ -30,11 +30,12 @@ describe('ServiceComponent', () => {
       let product = {'innerHTML' : '1'};
       let idInListTest = Number(product['innerHTML']) - 1;
       
-      products[idInListTest][3] = 10;
+      products[idInListTest].price = 15;
+      products[idInListTest].amount = 10;
 
       serviceTest.plusProduct(product);
       
-      expect(serviceTest.sumOfOrder).toEqual(savedSum + products[idInListTest][2]);
+      expect(serviceTest.sumOfOrder).toEqual(savedSum + products[idInListTest].price);
     });
 
     it('3. should descrease the amount of the products', () => {
@@ -43,11 +44,11 @@ describe('ServiceComponent', () => {
       let product = {'innerHTML' : '1'};
       let idInListTest = Number(product['innerHTML']) - 1;
       
-      products[idInListTest][3] = amountTest;
+      products[idInListTest].amount = amountTest;
 
       serviceTest.plusProduct(product);
       
-      expect(products[idInListTest][3]).toEqual(amountTest - 1);
+      expect(products[idInListTest].amount).toEqual(amountTest - 1);
     });
 
   }); // end of adding
@@ -60,12 +61,12 @@ describe('ServiceComponent', () => {
       let product = {'innerHTML' : '1'};
       let idInListTest = Number(product['innerHTML']) - 1;
       
-      products[idInListTest][3] = amountTest;
+      products[idInListTest].amount = amountTest;
       serviceTest.productsInOrder[idInListTest] = 5;
 
       serviceTest.minusProduct(product);
       
-      expect(products[idInListTest][3]).toEqual(amountTest + 1);
+      expect(products[idInListTest].amount).toEqual(amountTest + 1);
     });
 
     it('2. should decrease the sum of the order', () => {
@@ -74,12 +75,12 @@ describe('ServiceComponent', () => {
       let product = {'innerHTML' : '1'};
       let idInListTest = Number(product['innerHTML']) - 1;
       
-      products[idInListTest][3] = 10;
+      products[idInListTest].amount = 10;
       serviceTest.productsInOrder[idInListTest] = 5;
 
       serviceTest.minusProduct(product);
       
-      expect(serviceTest.sumOfOrder).toEqual(savedSum - products[idInListTest][2]);
+      expect(serviceTest.sumOfOrder).toEqual(savedSum - products[idInListTest].price);
     });
 
     it('3. should remove the product from receipt', () => {
@@ -159,7 +160,7 @@ describe('ServiceComponent', () => {
       serviceTest.order();
       
       expect(amounts['orders']).toEqual(ordersSaved + 1);
-      expect(orders[ordersSaved][2]).toEqual({ 1 : 10, 2: 20});
+      expect(orders[ordersSaved].products).toEqual({ 1 : 10, 2: 20});
     });
 
     it('3. should add new elem to the money stream correctly', () => {
@@ -171,7 +172,7 @@ describe('ServiceComponent', () => {
       serviceTest.order();
       
       expect(amounts['moneyStream']).toEqual(amountSaved + 1);
-      expect(moneyStream[amountSaved][3]).toEqual(savedSum);
+      expect(moneyStream[amountSaved].income).toEqual(savedSum);
     });
 
 

@@ -1,12 +1,14 @@
 import { TestBed, async } from '@angular/core/testing';
 import { CashboxComponent } from './cashbox.component';
 import { amounts,products,orders,moneyStream } from '../app.component'
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 
 describe('CashboxComponent', () => { 
   let cashboxTest; 
+  let arg = new FormBuilder();
   beforeEach(() => {
-    cashboxTest = new CashboxComponent();
+    cashboxTest = new CashboxComponent(arg);
   });
 
   describe('Adding new operation', () => {
@@ -17,15 +19,16 @@ describe('CashboxComponent', () => {
       let savedName = 'test name';
       let savedBalance = '10';
 
-      let nameOfOperation = { value : savedName}
-      let changeOfBalance = { value : savedBalance };
+      cashboxTest.initForm();
+
+      cashboxTest.CashboxForm.value.name = savedName;
+      cashboxTest.CashboxForm.value.income = savedBalance;
+
+      cashboxTest.addNewOperation();
       
-      
-      cashboxTest.addNewOperation(nameOfOperation, changeOfBalance);
-    
-      expect(moneyStream[savedAmount][2]).toEqual(savedName);
-      expect(moneyStream[savedAmount][3]).toEqual(~~savedBalance);
-      expect(amounts['moneyStream']).toEqual(savedAmount + 1)
+      expect(moneyStream[savedAmount].name).toEqual(savedName);
+      expect(moneyStream[savedAmount].income).toEqual(~~savedBalance);
+      expect(amounts['moneyStream']).toEqual(savedAmount + 1);
     });
 
     it('2. should get ready to the new adding', () => {
@@ -33,13 +36,15 @@ describe('CashboxComponent', () => {
       let savedName = 'test name';
       let savedBalance = '10';
 
-      let nameOfOperation = { value : savedName}
-      let changeOfBalance = { value : savedBalance };
-      
-      cashboxTest.addNewOperation(nameOfOperation, changeOfBalance);
+      cashboxTest.initForm();
 
-      expect(nameOfOperation.value).toEqual('');
-      expect(changeOfBalance.value).toEqual('');
+      cashboxTest.CashboxForm.value.name = savedName;
+      cashboxTest.CashboxForm.value.income = savedBalance;
+      
+      cashboxTest.addNewOperation();
+
+      expect(cashboxTest.CashboxForm.value.name).toEqual(['']);
+      expect(cashboxTest.CashboxForm.value.income).toEqual([null]);
 
     });
 
@@ -49,10 +54,12 @@ describe('CashboxComponent', () => {
       let savedName = 'test name';
       let savedBalance = '10';
 
-      let nameOfOperation = { value : savedName}
-      let changeOfBalance = { value : savedBalance };
+      cashboxTest.initForm();
+
+      cashboxTest.CashboxForm.value.name = savedName;
+      cashboxTest.CashboxForm.value.income = savedBalance;
       
-      cashboxTest.addNewOperation(nameOfOperation, changeOfBalance);
+      cashboxTest.addNewOperation();
       
       expect(cashboxTest.income).toEqual(savedIncome + Number(savedBalance));
 
@@ -63,11 +70,13 @@ describe('CashboxComponent', () => {
 
       let savedName = 'test name';
       let savedBalance = '-10';
-
-      let nameOfOperation = { value : savedName}
-      let changeOfBalance = { value : savedBalance };
       
-      cashboxTest.addNewOperation(nameOfOperation, changeOfBalance);
+      cashboxTest.initForm();
+
+      cashboxTest.CashboxForm.value.name = savedName;
+      cashboxTest.CashboxForm.value.income = savedBalance;
+      
+      cashboxTest.addNewOperation();
       
       expect(cashboxTest.expense).toEqual(savedExpense + (-Number(savedBalance)));
 

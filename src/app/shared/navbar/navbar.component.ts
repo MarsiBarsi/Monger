@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit{
         let navbar : HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
     }
-    getTitle(){
+    getTitle(): string {
         let titlee = window.location.pathname;
         titlee = titlee.substring(1);
         for(let item = 0; item < this.listTitles.length; item++){
@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit{
         }
         return 'Dashboard';
     }
-    sidebarToggle(){
+    sidebarToggle(): void {
         let toggleButton = this.toggleButton;
         let body = document.getElementsByTagName('body')[0];
 

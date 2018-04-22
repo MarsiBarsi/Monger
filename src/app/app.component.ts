@@ -95,8 +95,13 @@ interface FireCrm {
 export let crmDoc : AngularFirestoreDocument<FireCrm>;
 export let crm : Observable<FireCrm>;
 
-export let updateFire = () => {
-  crmDoc.update({products : products,amounts : amounts, orders : orders, moneyStream : moneyStream});
+export let updateFire = (): void => {
+  crmDoc.update({
+    products : products,
+    amounts : amounts,
+    orders : orders,
+    moneyStream : moneyStream
+  });
 }
 
 @Component({

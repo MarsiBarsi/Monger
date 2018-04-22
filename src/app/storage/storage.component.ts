@@ -91,6 +91,7 @@ export class StorageComponent implements OnInit {
 
     isControlInvalid(form : FormGroup, controlName : string): boolean {
         const control = form.controls[controlName];
+        console.log(form.controls[controlName]);
         const result = control.invalid && control.touched;
         return result;
     }
@@ -124,9 +125,9 @@ export class StorageComponent implements OnInit {
     deleteProduct(indexOfProd : number): void {
         products[indexOfProd] = {
             id : 0,
-            name : '',
-            price : 0,
-            amount : 0
+            name : 'Deleted',
+            price : -1,
+            amount : -1
         };
         //updateFire();
     } 

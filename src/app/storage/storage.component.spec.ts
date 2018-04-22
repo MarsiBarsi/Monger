@@ -17,12 +17,13 @@ describe('StorageComponent', () => {
     it('1. should count amount by adding new product', () => {
       
       let numberOfProducts = amounts['products'];
-      let [nameOfProduct,priceOfProduct,amountOfProducts] = [{},{},{}];
 
-      nameOfProduct['value'] = 'testProduct';
-      priceOfProduct['value'] = '14';
-      amountOfProducts['value'] = '10';
-      storageTest.addNewProduct(nameOfProduct,priceOfProduct,amountOfProducts);
+      storageTest.initForm();
+      storageTest.newProductForm.value.name = 'test name';
+      storageTest.newProductForm.value.price = '15';
+      storageTest.newProductForm.value.amount = '20';
+
+      storageTest.addNewProduct();
       
       expect(amounts['products']).toEqual(numberOfProducts + 1);
 
@@ -31,75 +32,69 @@ describe('StorageComponent', () => {
     it('2. should add new product correctly', () => {
       
       
-      let [nameOfProduct,priceOfProduct,amountOfProducts] = [{},{},{}];
+      storageTest.initForm();
+      storageTest.newProductForm.value.name = 'test name';
+      storageTest.newProductForm.value.price = '15';
+      storageTest.newProductForm.value.amount = '20';
 
-      nameOfProduct['value'] = 'testProduct 2';
-      priceOfProduct['value'] = '5';
-      amountOfProducts['value'] = 'test';
-      storageTest.addNewProduct(nameOfProduct,priceOfProduct,amountOfProducts);
+      storageTest.addNewProduct();
       
       let testProd = products.pop();
       
-      expect(testProd[0] > 0).toEqual(true);
-      expect(testProd[1]).toEqual('testProduct 2');
-      expect(testProd[2]).toEqual(5);
-      expect(testProd[3]).toEqual(NaN);
+      expect(testProd.id > 0).toEqual(true);
+      expect(testProd.name).toEqual('test name');
+      expect(testProd.price).toEqual(15);
+      expect(testProd.amount).toEqual(20);
       
     });
 
     it('3. should set to zeros field values', () => {
       
-      
-      let [nameOfProduct,priceOfProduct,amountOfProducts] = [{},{},{}];
+      storageTest.initForm();
+      storageTest.newProductForm.value.name = 'test name';
+      storageTest.newProductForm.value.price = '15';
+      storageTest.newProductForm.value.amount = '20';
 
-      nameOfProduct['value'] = 'testProduct 2';
-      priceOfProduct['value'] = '5';
-      amountOfProducts['value'] = 'test';
-      storageTest.addNewProduct(nameOfProduct,priceOfProduct,amountOfProducts);
+      storageTest.addNewProduct();
       
-      expect(nameOfProduct['value']).toEqual('');
-      expect(priceOfProduct['value']).toEqual('');
-      expect(amountOfProducts['value']).toEqual('');
+      expect(storageTest.newProductForm.value.name).toEqual(['']);
+      expect(storageTest.newProductForm.value.price).toEqual([null]);
+      expect(storageTest.newProductForm.value.amount).toEqual([null]);
 
     });
 
     it('4. should show notification if name of product is empty', () => {
       
-      
-      let [nameOfProduct,priceOfProduct,amountOfProducts] = [{},{},{}];
+      storageTest.initForm();
+      storageTest.newProductForm.value.name = '';
+      storageTest.newProductForm.value.price = '15';
+      storageTest.newProductForm.value.amount = '20';
+      storageTest.newProductForm.controls['name'].touched = true;
 
-      nameOfProduct['value'] = '';
-      priceOfProduct['value'] = '5';
-      amountOfProducts['value'] = 'test';
-      storageTest.addNewProduct(nameOfProduct,priceOfProduct,amountOfProducts);
-      
-      expect(storageTest.statusesWrong).toBeTruthy();
+      expect(storageTest.isControlInvalid(storageTest.newProductForm,'name')).toBeTruthy();
 
-    });
-    
+    });  
+
   }); // end of adding
 
   describe('Changing', () => {
 
     it('1. should change the product correctly', () => {
-      
-      
-      let [indexOfProduct, newPriceOfProduct,newAmountOfProducts] = [{},{},{}];
+      let indexForTest = 1;
 
-      indexOfProduct['value'] = '2';
-      let indexForTest = 2;
-      newPriceOfProduct['value'] = '55';
-      newAmountOfProducts['value'] = '10';
+      storageTest.initForm();
+      
+      storageTest.changeProductForm.value.id = String(indexForTest);
+      storageTest.changeProductForm.value.newPrice = '15';
+      storageTest.changeProductForm.value.newAmount = '20';
 
-      
-      storageTest.changeProduct(indexOfProduct, newPriceOfProduct,newAmountOfProducts);
-      
+      storageTest.changeProduct();
+
       let testProd = products[indexForTest - 1];
       
-      expect(testProd[0]).toEqual(2);
-      expect(testProd[2]).toEqual(55);
-      expect(testProd[3]).toEqual(10);
-      
+      expect(testProd.id).toEqual(1);
+      expect(testProd.price).toEqual(15);
+      expect(testProd.amount).toEqual(20);      
     });
 
   }); // end of changing
@@ -107,14 +102,15 @@ describe('StorageComponent', () => {
   describe('Deleting', () => {
 
     it('1. should delete the product correctly', () => {
-      
-      
-      let indexToDelete = 0;
+
+      let indexToDelete : number = 1;
       
       storageTest.deleteProduct(indexToDelete);
       
-      expect(products[0]).toEqual([0,'',0,0]);
-      
+      expect(products[indexToDelete].id).toEqual(0);
+      expect(products[indexToDelete].name).toEqual('Deleted');
+      expect(products[indexToDelete].price).toEqual(-1);
+      expect(products[indexToDelete].amount).toEqual(-1);
     });
 
   });

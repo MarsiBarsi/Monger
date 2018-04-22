@@ -13,6 +13,7 @@ export declare interface TableData {
     dataRows: string[][];
 }
 
+
 @Component({
     selector: 'stats-cmp',
     moduleId: module.id,
@@ -49,12 +50,12 @@ export class StatsComponent implements OnInit{
       Object.assign(this, {data})   
     }
     
-    onSelect(event) {
-      console.log(event);
+    onSelect(event): void {
+      //console.log(event);
     }
 
 
-    selectStatistics(){
+    selectStatistics(): void {
         
         let arrayOfProducts = [];
         
@@ -112,7 +113,7 @@ export class StatsComponent implements OnInit{
                 finalObject.labels[i] = '';
             }
         }
-        console.log(finalObject);
+        //console.log(finalObject);
         return finalObject;
     }
 
