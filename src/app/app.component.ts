@@ -7,6 +7,8 @@ import 'rxjs/add/operator/map';
 
 import { query } from '@angular/animations';
 import { createNgModule } from '@angular/compiler/src/core';
+import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
 
 declare let $:any;
 
@@ -19,7 +21,7 @@ export interface Product {
 };
 
 export let products : Array<Product> = [
-  {
+ /* {
     id : 1,
     name : 'товар 1',
     price : 4,
@@ -30,7 +32,7 @@ export let products : Array<Product> = [
     name : 'товар 2',
     price : 7,
     amount : 5
-  }
+  } */
 ];
 
 export interface MoneyOperation {
@@ -41,7 +43,7 @@ export interface MoneyOperation {
 };
 
 export let moneyStream : Array<MoneyOperation> = [
-  {
+  /*{
     id : 1,
     date : new Date(2018, 0, 1, 0, 0, 0, 0),
     name : 'прибыль от продажи',
@@ -52,7 +54,7 @@ export let moneyStream : Array<MoneyOperation> = [
     date : new Date(2018, 0, 2, 0, 0, 0, 0),
     name : 'выплата зарплат',
     income : -50
-  }
+  } */
 ];
 
 export interface Order {
@@ -62,7 +64,7 @@ export interface Order {
 }
 
 export let orders : Array<Order> = [
-  {
+ /*  {
     id : 1,
     date : new Date(2018, 0, 1, 0, 0, 0, 0),
     products : { 1 : 2 }
@@ -71,7 +73,7 @@ export let orders : Array<Order> = [
     id : 2,
     date : new Date(),
     products : { 1 : 1, 2 : 3 }
-  }
+  } */
 ];
 
 export interface AmountCounter {
@@ -83,7 +85,7 @@ export interface AmountCounter {
 export let amounts : AmountCounter = {
   products : 2,
   moneyStream : 2,
-  orders : 2,
+  orders : 2, 
 }
 
 interface FireCrm {
@@ -119,7 +121,7 @@ export class AppComponent{
 
   crmDoc : AngularFirestoreDocument<FireCrm>;
   crm : Observable<FireCrm>;
-  sub : any;
+
   constructor(private afs: AngularFirestore) {};
   
   ngOnInit() {
@@ -129,16 +131,15 @@ export class AppComponent{
     //console.log(products);
     // this.updateFire();
     console.log(this.crm);
-    /*
-    this.sub = this.crm.subscribe(elem => {
+
+    let sub = this.crm.subscribe(elem => {
       products = elem.products;
       orders = elem.orders;
       moneyStream = elem.moneyStream;
       amounts = elem.amounts;
-    });
-    */
-    this.updateFire();
-    
+      this.updateFire();
+      sub.unsubscribe();
+    });    
   }
 
   updateFire() {

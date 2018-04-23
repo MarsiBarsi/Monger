@@ -92,4 +92,6 @@ export class ServiceComponent implements OnInit{
         this.sumOfOrder = 0;
         this.moneyOfCustomer = 0;
     }
+
+    
 }
