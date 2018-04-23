@@ -45,7 +45,7 @@ export class ServiceComponent implements OnInit{
             else {
                 this.productsInOrder[idInList] += 1;
             }
-            //updateFire();
+            
             //console.log(this.productsInOrder);
         }
         //console.log(elem.children[0].innerHTML);
@@ -75,7 +75,7 @@ export class ServiceComponent implements OnInit{
            income : this.sumOfOrder
         });
 
-        //updateFire();
+        
         
         // готовимся к следующему заказу
         this.sumOfOrder = 0;
@@ -87,11 +87,11 @@ export class ServiceComponent implements OnInit{
         this.productsInOrder.forEach( (elem,index) => {
             products[index][3] += elem;
         });
-        //updateFire();
+        
         this.productsInOrder = [];
         this.sumOfOrder = 0;
         this.moneyOfCustomer = 0;
     }
 
-    
+        
 }

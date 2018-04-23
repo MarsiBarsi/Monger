@@ -2,6 +2,8 @@ import { TestBed, async } from '@angular/core/testing';
 import { StorageComponent } from './storage.component'
 import { products, amounts } from '../app.component'
 import { FormBuilder } from '@angular/forms';
+import { FormControl, Validators, Form } from '@angular/forms'
+
 
 
 describe('StorageComponent', () => { 
@@ -73,7 +75,7 @@ describe('StorageComponent', () => {
 
       expect(storageTest.isControlInvalid(storageTest.newProductForm,'name')).toBeTruthy();
 
-    });  
+    });
 
   }); // end of adding
 
@@ -115,5 +117,30 @@ describe('StorageComponent', () => {
 
   });
 
+  describe('addFieldType() -> types for the add form', () => {
+
+    it('1. should return "text" for first field and "number" for other', () => {
+
+      let testText : string = storageTest.addFieldType(0);
+      let testNum : string = storageTest.addFieldType(22);
+      
+      expect(testText).toEqual('text');
+      expect(testNum).toEqual('number');
+    });
+
+  });
+
+  describe('isControlInvalid() -> showing of notifications', () => {
+
+    it('1. should return false for untouched form', () => {
+      let controlName = 'name';
+      storageTest.initForm();
+      storageTest.newProductForm.controls[controlName].touched = false;
+
+      expect(storageTest.isControlInvalid(storageTest.newProductForm,controlName)).toBeFalsy();
+
+    });
+
+  });
 
 });

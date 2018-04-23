@@ -114,7 +114,7 @@ export class StorageComponent implements OnInit {
             amount : Number(this.newProductForm.value.amount)
         });
         
-        //updateFire();
+        
         this.newProductForm.setValue({
             name : [''],
             price : [null],
@@ -129,13 +129,13 @@ export class StorageComponent implements OnInit {
             price : -1,
             amount : -1
         };
-        //updateFire();
+        
     } 
 
     changeProduct(): void {
         products[Number(this.changeProductForm.value.id - 1)].price = Number(this.changeProductForm.value.newPrice);
         products[Number(this.changeProductForm.value.id - 1)].amount = Number(this.changeProductForm.value.newAmount);
-        //updateFire();
+        
         this.changeProductForm.setValue({
             id : [null],
             newPrice : [null],

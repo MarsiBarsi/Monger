@@ -21,7 +21,7 @@ export interface Product {
 };
 
 export let products : Array<Product> = [
- /* {
+  {
     id : 1,
     name : 'товар 1',
     price : 4,
@@ -32,7 +32,7 @@ export let products : Array<Product> = [
     name : 'товар 2',
     price : 7,
     amount : 5
-  } */
+  } 
 ];
 
 export interface MoneyOperation {
@@ -43,7 +43,7 @@ export interface MoneyOperation {
 };
 
 export let moneyStream : Array<MoneyOperation> = [
-  /*{
+  {
     id : 1,
     date : new Date(2018, 0, 1, 0, 0, 0, 0),
     name : 'прибыль от продажи',
@@ -54,7 +54,7 @@ export let moneyStream : Array<MoneyOperation> = [
     date : new Date(2018, 0, 2, 0, 0, 0, 0),
     name : 'выплата зарплат',
     income : -50
-  } */
+  } 
 ];
 
 export interface Order {
@@ -64,7 +64,7 @@ export interface Order {
 }
 
 export let orders : Array<Order> = [
- /*  {
+  {
     id : 1,
     date : new Date(2018, 0, 1, 0, 0, 0, 0),
     products : { 1 : 2 }
@@ -73,7 +73,7 @@ export let orders : Array<Order> = [
     id : 2,
     date : new Date(),
     products : { 1 : 1, 2 : 3 }
-  } */
+  } 
 ];
 
 export interface AmountCounter {
