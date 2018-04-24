@@ -95,20 +95,6 @@ interface FireCrm {
   orders : Array<Order>
 }
 
-//export let crmDoc : AngularFirestoreDocument<FireCrm>;
-//export let crm : Observable<FireCrm>;
-export let updateFire = () => {
-  
-};
-/*
-export let updateFire = (): void => {
-  crmDoc.update({
-    products : products,
-    amounts : amounts,
-    orders : orders,
-    moneyStream : moneyStream
-  });
-}*/
 
 @Component({
   selector: 'app-root',
@@ -142,7 +128,7 @@ export class AppComponent{
     });    
   }
 
-  updateFire() {
+  updateFire(): void {
     setInterval(async () => this.crmDoc.set({
       products : products,
       amounts : amounts,

@@ -3,6 +3,9 @@ import * as Chartist from 'chartist';
 import { SidebarComponent, RouteInfo, ROUTES } from '../sidebar/sidebar.component';
 import { orders } from '../app.component';
 
+interface RouteInfoWithIcon extends RouteInfo{
+  iconClass : string;
+}
 
 const iconClasses : string[] = [
   'icon-big icon-warning text-center',
@@ -19,7 +22,7 @@ const iconClasses : string[] = [
 
 export class DashboardComponent implements OnInit{
   
-  public menuItems: any[] = [ ];
+  public menuItems: RouteInfoWithIcon[] = [ ];
 
   ordersFromToday(): number[] {
     let now : Date = new Date();

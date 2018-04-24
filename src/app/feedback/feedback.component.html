@@ -1,11 +1,11 @@
 <div class="main-content">
     <div class="container-fluid">
         <p>Если у вас возникли какие-либо вопросы или пожелания, оставьте их в данной форме</p>
-        <textarea class="form-control" rows="10"></textarea>
+        <textarea class="form-control" rows="10" #feed></textarea>
         <p>Ваш e-mail для обратной связи: </p>
         <div class="form-group">
-            <input type="text" value="" placeholder="e-mail" class="form-control" />
+            <input type="text" value="" placeholder="e-mail" class="form-control" #email/>
         </div>
-        <button class="btn btn-success">Отправить</button>
+        <button class="btn btn-success" (click)="feedback(feed, email)">Отправить</button>
     </div>
 </div>

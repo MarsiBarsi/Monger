@@ -1,6 +1,6 @@
 import { Component, OnInit,HostListener, Input } from '@angular/core';
 
-import { products,orders,moneyStream, amounts,updateFire, Product } from '../app.component'
+import { products,orders,moneyStream, amounts, Product } from '../app.component'
 
 @Component({
     selector: 'service-cmp',

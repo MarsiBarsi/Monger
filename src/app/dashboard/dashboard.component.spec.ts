@@ -2,6 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { DashboardComponent } from './dashboard.component'
 import { amounts,products,orders,moneyStream } from '../app.component'
 import { isNumber } from '@swimlane/ngx-charts/release/utils';
+import { SidebarComponent, RouteInfo, ROUTES } from '../sidebar/sidebar.component';
 
 
 describe('DashboardComponent', () => { 
@@ -26,8 +27,16 @@ describe('DashboardComponent', () => {
       expect(status).toBeTruthy();
 
     });
+  });
 
+  describe('menuCreating()', () => {
     
+    it('1. should generate right paths', () => {
+    
+      dashboardTest.menuCreating();
+      
+      expect(dashboardTest.menuItems[0].path.slice(0,3)).toEqual('../');
+    });
   });
 
   

@@ -10,4 +10,9 @@ import { Component, OnInit } from '@angular/core';
 export class FeedbackComponent implements OnInit{
     ngOnInit(){
     }
+
+    feedback(feed : HTMLInputElement, email : HTMLInputElement): void {
+        feed.value = '';
+        email.value = '';
+    }
 }
