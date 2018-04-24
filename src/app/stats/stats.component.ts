@@ -6,7 +6,6 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 export let data : Array<Object> = [];
 
-declare let $:any;
 
 export declare interface TableData {
     headerRow: string[];

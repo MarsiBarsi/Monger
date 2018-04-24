@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
-declare let $:any;
+
 
 export interface RouteInfo {
     path: string;
@@ -26,11 +26,18 @@ export const ROUTES: RouteInfo[] = [
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
+    winSize : number;
+
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
     }
+
+    @HostListener('window:resize', ['$event']) onResize(event) {
+      this.winSize = event.target.innerWidth; 
+    }
+
     isNotMobileMenu(): boolean {
-        if($(window).width() > 991){
+        if(this.winSize > 991){
             return false;
         }
         return true;

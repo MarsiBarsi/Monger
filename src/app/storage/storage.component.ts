@@ -5,7 +5,6 @@ import { FormControl, Validators, Form } from '@angular/forms'
 import { products, amounts,AmountCounter, Product } from '../app.component'
 import { FormGroup, FormBuilder } from '@angular/forms';
 
-declare let $:any;
 
 declare interface StorageTableData {
     headerRow: string[];

@@ -10,7 +10,7 @@ import { createNgModule } from '@angular/compiler/src/core';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 
-declare let $:any;
+
 
 
 export interface Product {
