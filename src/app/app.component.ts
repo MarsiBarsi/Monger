@@ -32,7 +32,7 @@ export let products : Array<Product> = [
     name : 'товар 2',
     price : 7,
     amount : 5
-  } 
+  }
 ];
 
 export interface MoneyOperation {
@@ -101,7 +101,7 @@ interface FireCrm {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
- 
+
 
 export class AppComponent{
 
@@ -114,9 +114,6 @@ export class AppComponent{
     
     this.crmDoc = this.afs.doc('crm/2O6FeLOoFWUtbdOkJDWR');
     this.crm = this.crmDoc.valueChanges();
-    //console.log(products);
-    // this.updateFire();
-    console.log(this.crm);
 
     let sub = this.crm.subscribe(elem => {
       products = elem.products;
@@ -135,7 +132,6 @@ export class AppComponent{
       orders : orders,
       moneyStream : moneyStream
     }), 2000);
-  } 
-  
+  }
 
 }

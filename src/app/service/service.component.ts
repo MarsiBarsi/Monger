@@ -18,10 +18,7 @@ export class ServiceComponent implements OnInit{
         
     ]; // productsInOrder[id_товара] = кол-во товара
 
-    
-
-    ngOnInit(){
-        
+    ngOnInit(){    
     }
 
     minusProduct(artikul : HTMLElement): void {
@@ -45,10 +42,7 @@ export class ServiceComponent implements OnInit{
             else {
                 this.productsInOrder[idInList] += 1;
             }
-            
-            //console.log(this.productsInOrder);
         }
-        //console.log(elem.children[0].innerHTML);
     }
 
     order(): void {
@@ -75,8 +69,6 @@ export class ServiceComponent implements OnInit{
            income : this.sumOfOrder
         });
 
-        
-        
         // готовимся к следующему заказу
         this.sumOfOrder = 0;
         this.productsInOrder = [];
@@ -92,6 +84,4 @@ export class ServiceComponent implements OnInit{
         this.sumOfOrder = 0;
         this.moneyOfCustomer = 0;
     }
-
-        
 }

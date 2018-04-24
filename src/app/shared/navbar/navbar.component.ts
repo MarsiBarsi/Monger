@@ -37,9 +37,9 @@ export class NavbarComponent implements OnInit{
                 return this.listTitles[item].title;
             }
         }
-        return 'Dashboard';
+        return 'Ошибка 404';
     }
-    sidebarToggle(): void {
+     sidebarToggle(): void {
         let toggleButton = this.toggleButton;
         let body = document.getElementsByTagName('body')[0];
 
@@ -54,5 +54,5 @@ export class NavbarComponent implements OnInit{
             this.sidebarVisible = false;
             body.classList.remove('nav-open');
         }
-    }
+    } 
 }

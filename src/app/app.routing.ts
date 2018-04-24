@@ -39,6 +39,6 @@ export const AppRoutes: Routes = [
     },
     {
         path : '**',
-        component : DashboardComponent
+        redirectTo : 'dashboard'
     }
 ]

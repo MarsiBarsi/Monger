@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Component, OnInit, ApplicationInitStatus, Input } from '@angular/core';
 import { TableData } from '../stats/stats.component'
 import { FormControl, Validators, Form } from '@angular/forms'
-import { products, amounts,AmountCounter, Product, AppComponent } from '../app.component'
+import { products, amounts,AmountCounter, Product } from '../app.component'
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 declare let $:any;
@@ -35,8 +35,6 @@ export class StorageComponent implements OnInit {
 
     constructor(private fb: FormBuilder){}
 
-    
-    
     public addFormInfo : Inputs[] = [
         {
             name : 'Имя товара',
@@ -113,7 +111,6 @@ export class StorageComponent implements OnInit {
             price : Number(this.newProductForm.value.price),
             amount : Number(this.newProductForm.value.amount)
         });
-        
         
         this.newProductForm.setValue({
             name : [''],
