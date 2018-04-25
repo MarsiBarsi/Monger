@@ -1,6 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { DashboardComponent } from './dashboard.component'
-import { amounts,products,orders,moneyStream } from '../app.component'
+import { orders } from '../data'
+import { Order } from '../interfaces'
 import { isNumber } from '@swimlane/ngx-charts/release/utils';
 import { SidebarComponent, RouteInfo, ROUTES } from '../sidebar/sidebar.component';
 

@@ -1,6 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { CashboxComponent } from './cashbox.component';
-import { amounts,products,orders,moneyStream } from '../app.component'
+import { moneyStream,amounts } from '../data'
+import { MoneyOperation, AmountCounter, Inputs } from '../interfaces';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 

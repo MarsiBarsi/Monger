@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as Chartist from 'chartist';
 import { SidebarComponent, RouteInfo, ROUTES } from '../sidebar/sidebar.component';
-import { orders } from '../app.component';
+import { orders } from '../data'
+import { Order } from '../interfaces'
 
 interface RouteInfoWithIcon extends RouteInfo{
   iconClass : string;
@@ -21,7 +22,8 @@ const iconClasses : string[] = [
 })
 
 export class DashboardComponent implements OnInit{
-  
+  @Input() orders : Array<Order>;
+
   public menuItems: RouteInfoWithIcon[] = [ ];
 
   ordersFromToday(): number[] {

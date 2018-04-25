@@ -2,19 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Component, OnInit, ApplicationInitStatus, Input } from '@angular/core';
 import { TableData } from '../stats/stats.component'
 import { FormControl, Validators, Form } from '@angular/forms'
-import { products, amounts,AmountCounter, Product } from '../app.component'
+import { products,amounts } from '../data'
+import { Product, AmountCounter, Inputs } from '../interfaces';
+
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 
 declare interface StorageTableData {
     headerRow: string[];
     dataRows : Array<Product>;
-}
-
-declare interface Inputs{
-    name : string,
-    controlName : string,
-    wrongMes : string
 }
 
 

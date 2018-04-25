@@ -1,6 +1,7 @@
 import { Component, OnInit,HostListener, Input } from '@angular/core';
 
-import { products,orders,moneyStream, amounts, Product } from '../app.component'
+import { products,moneyStream,orders,amounts } from '../data'
+import { Product, MoneyOperation, Order, AmountCounter } from '../interfaces';
 
 @Component({
     selector: 'service-cmp',
@@ -9,6 +10,10 @@ import { products,orders,moneyStream, amounts, Product } from '../app.component'
 })
 
 export class ServiceComponent implements OnInit{
+    @Input() moneyStream : Array<MoneyOperation>;
+    @Input() orders : Array<Order>;
+    @Input() amounts : AmountCounter;
+  
     products : Product[] = products;
 
     sumOfOrder : number = 0;

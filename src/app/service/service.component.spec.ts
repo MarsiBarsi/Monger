@@ -1,6 +1,8 @@
 import { TestBed, async } from '@angular/core/testing';
 import { ServiceComponent } from './service.component'
-import { amounts,products,orders,moneyStream } from '../app.component'
+
+import { products,moneyStream,orders,amounts } from '../data'
+import { Product, MoneyOperation, Order, AmountCounter } from '../interfaces';
 
 
 describe('ServiceComponent', () => { 

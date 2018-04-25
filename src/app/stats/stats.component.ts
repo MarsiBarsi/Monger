@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import * as Chartist from 'chartist';
-import { amounts,orders, products, moneyStream } from '../app.component';
+import { products,moneyStream,orders,amounts } from '../data'
+import { Product, MoneyOperation, Order, AmountCounter} from '../interfaces'
 
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 
@@ -12,6 +13,7 @@ export declare interface TableData {
     dataRows: string[][];
 }
 
+let $: any;
 
 @Component({
     selector: 'stats-cmp',
@@ -20,6 +22,13 @@ export declare interface TableData {
 })
 
 export class StatsComponent implements OnInit{
+    
+
+    @Input() products: Array<Product>;
+    @Input() moneyStream : Array<MoneyOperation>;
+    @Input() orders : Array<Order>;
+    @Input() amounts : AmountCounter;
+  
     public wholeStatistics = [
         { 
             mes : 'Всего заказов завершено',
@@ -38,6 +47,9 @@ export class StatsComponent implements OnInit{
     single: any[];
     multi: any[];
     
+    cardSize : Array<number> = [];
+    
+
     view: any[] = [$(this).parent().width(),$(this).parent().height()];
     
 

@@ -1,14 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser'; 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TableData } from '../stats/stats.component'
 import { FormGroup,  FormBuilder, FormControl, Validators } from '@angular/forms'
-import { moneyStream,amounts, MoneyOperation } from '../app.component'
 
-declare interface Inputs {
-    name : string,
-    controlName : string,
-    wrongMes : string
-}
+import { moneyStream,amounts } from '../data'
+import { MoneyOperation, AmountCounter, Inputs } from '../interfaces';
+
 
 declare interface CashboxTableData {
     headerRow: string[];
@@ -21,8 +18,9 @@ declare interface CashboxTableData {
     templateUrl: 'cashbox.component.html'
 })
 
-export class CashboxComponent{    
-    statusesWrong = false;
+export class CashboxComponent{
+    @Input() amounts : AmountCounter;
+    @Input() moneyStream : Array<MoneyOperation>;
 
     public CashboxForm : FormGroup;
     constructor(private fb: FormBuilder){}
@@ -40,7 +38,6 @@ export class CashboxComponent{
         }
     ];
 
-    moneyStream = moneyStream;
     public cashboxTable: CashboxTableData;
     
     income : number = 0
