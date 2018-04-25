@@ -11,9 +11,8 @@ export let data : Array<Object> = [];
 export declare interface TableData {
     headerRow: string[];
     dataRows: string[][];
-}
+};
 
-let $: any;
 
 @Component({
     selector: 'stats-cmp',
@@ -28,6 +27,11 @@ export class StatsComponent implements OnInit{
     @Input() moneyStream : Array<MoneyOperation>;
     @Input() orders : Array<Order>;
     @Input() amounts : AmountCounter;
+
+    winWidth : number;
+    @HostListener('window:resize', ['$event']) onResize(event) {
+        this.winWidth = event.target.innerWidth;
+    }
   
     public wholeStatistics = [
         { 
@@ -50,7 +54,7 @@ export class StatsComponent implements OnInit{
     cardSize : Array<number> = [];
     
 
-    view: any[] = [$(this).parent().width(),$(this).parent().height()];
+    view: any[] = [this.winWidth / 3,400];
     
 
     colorScheme = {
@@ -82,8 +86,6 @@ export class StatsComponent implements OnInit{
         });
 
         let i = 0;
-        console.log(arrayOfProducts);
-        
         arrayOfProducts.forEach( (elem,index) => {
             data[i] = {
                 name : products[index - 1].name,
