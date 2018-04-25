@@ -23,7 +23,7 @@
                             <div class="col-xs-12">
                                 <label>Артикул: </label>
                                 <label #artikul>{{product.id}}</label>
-                                <div class="text-center" #name>
+                                <div class="text-center">
                                     <h3 class="bg-success">{{product.name}}</h3>
                                     <label> Остаток:</label>
                                     <label>{{product.amount}}</label>
@@ -68,12 +68,36 @@
                     <p>
                         Итого: {{sumOfOrder}} р. | Посетитель платит: <input type="number" id="oddMoney" [(ngModel)]="moneyOfCustomer" > р. | Сдача: {{moneyOfCustomer - sumOfOrder}} р.
                     </p>
-                   
                     <button class="btn btn-success btn-lg" (click)="order()">Оформить заказ</button>
-                    
                     <button class="btn btn-danger btn-lg" (click)="cancel()">Отменить заказ</button>
                </div>
             </div>
     </div>
 
+    <div class="content">
+        <h3>Отложенные заказы: </h3>
+    </div>
+    <div *ngFor="let elem of holdedOrders; let i = index">
+        <div class="col-lg-3 col-sm-6" *ngIf="elem.order.length">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label>Отложенный заказ #</label>
+                            <label>{{i+1}}</label>
+                            <div class="text-center">
+                                <p> На сумму: {{elem.sum}} р.</p>
+                                <div *ngFor="let amount of elem.order; let j = index">
+                                     <label *ngIf="products[j].id">{{products[j].name}} x{{amount}}</label>
+                                </div>
+                                <div>
+                                    <button class="btn btn-success" (click)='returnHolded(i)'>Восстановить</button>
+                                </div> 
+                            </div>                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
 </div>

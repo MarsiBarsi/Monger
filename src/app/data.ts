@@ -1,4 +1,4 @@
-import { Product, MoneyOperation, Order, AmountCounter, FireCrm} from '../app/interfaces'
+import { Product, MoneyOperation, Order, AmountCounter, HoldedOrder, FireCrm} from '../app/interfaces'
 
 export let products : Array<Product> = [
     {
@@ -49,3 +49,9 @@ export let products : Array<Product> = [
     orders : 2, 
   }
   
+  export let holdedOrders : Array<HoldedOrder> = [
+    {
+      sum : 100,
+      order : [2]
+    }
+  ];

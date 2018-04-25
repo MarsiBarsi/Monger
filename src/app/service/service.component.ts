@@ -1,7 +1,7 @@
 import { Component, OnInit,HostListener, Input } from '@angular/core';
 
-import { products,moneyStream,orders,amounts } from '../data'
-import { Product, MoneyOperation, Order, AmountCounter } from '../interfaces';
+import { products,moneyStream,orders,amounts,holdedOrders } from '../data'
+import { Product, MoneyOperation, Order, AmountCounter,HoldedOrder } from '../interfaces';
 
 @Component({
     selector: 'service-cmp',
@@ -13,7 +13,8 @@ export class ServiceComponent implements OnInit{
     @Input() moneyStream : Array<MoneyOperation>;
     @Input() orders : Array<Order>;
     @Input() amounts : AmountCounter;
-  
+   // @Input() holdedOrders : Array<number[]>;
+    holdedOrders : Array<HoldedOrder> = holdedOrders;
     products : Product[] = products;
 
     sumOfOrder : number = 0;
@@ -82,11 +83,32 @@ export class ServiceComponent implements OnInit{
 
     cancel(): void {
         this.productsInOrder.forEach( (elem,index) => {
-            products[index][3] += elem;
+            products[index].amount += elem;
         });
         
         this.productsInOrder = [];
         this.sumOfOrder = 0;
         this.moneyOfCustomer = 0;
+    }
+
+    returnHolded(id : number): void {
+        this.sumOfOrder = this.holdedOrders[id].sum;
+        this.productsInOrder = this.holdedOrders[id].order;
+        this.holdedOrders[id].sum = 0;
+        this.holdedOrders[id].order = [];
+    }
+
+    ngOnDestroy(): void {
+        if(this.productsInOrder.length){
+            let holdStatus = confirm('Заказ не завершен. Отложить?');
+            if (holdStatus) {
+                holdedOrders.push({
+                    sum : this.sumOfOrder,
+                    order : this.productsInOrder
+                });
+            } else {
+                this.cancel();
+            }
+        }
     }
 }

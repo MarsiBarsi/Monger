@@ -36,3 +36,8 @@ export declare interface Inputs {
     controlName : string,
     wrongMes : string
 }
+
+export interface HoldedOrder {
+    sum : number,
+    order : Array<number>
+}
