@@ -1,7 +1,5 @@
 <div class="container-fluid">
-
     <div class="row">
-        
         <div class="col-lg-12 col-sm-6">
             <div class="card">
                 <div class="content">
@@ -45,33 +43,33 @@
     </div>
 
     <div class="card">
-            <div class="content">
-                <h3>Заказ: </h3>
-            </div>
-
-            <div class="content table-responsive">
-                <table class="table table-striped">
-                    <tbody>
-                        <tr>
-                            <th>Товар</th>
-                            <th>Количество в заказе</th>
-                            <th>Цена</th>
-                        </tr>
-                        <tr *ngFor="let row of productsInOrder; let i = index">
-                            <td *ngIf="row">{{ products[i].name }}</td>
-                            <td *ngIf="row">{{ row }}</td>
-                            <td *ngIf="row">{{ row * products[i].price }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-               <div class="content">
-                    <p>
-                        Итого: {{sumOfOrder}} р. | Посетитель платит: <input type="number" id="oddMoney" [(ngModel)]="moneyOfCustomer" > р. | Сдача: {{moneyOfCustomer - sumOfOrder}} р.
-                    </p>
-                    <button class="btn btn-success btn-lg" (click)="order()">Оформить заказ</button>
-                    <button class="btn btn-danger btn-lg" (click)="cancel()">Отменить заказ</button>
-               </div>
-            </div>
+        <div class="content">
+            <h3>Заказ: </h3>
+        </div>
+        
+        <div class="content table-responsive">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>Товар</th>
+                        <th>Количество в заказе</th>
+                        <th>Цена</th>
+                    </tr>
+                    <tr *ngFor="let row of productsInOrder; let i = index">
+                        <td *ngIf="row">{{ products[i].name }}</td>
+                        <td *ngIf="row">{{ row }}</td>
+                        <td *ngIf="row">{{ row * products[i].price }}</td>
+                    </tr>
+                </tbody>
+            </table>
+           <div class="content">
+                <p>
+                    Итого: {{sumOfOrder}} р. | Посетитель платит: <input type="number" id="oddMoney" [(ngModel)]="moneyOfCustomer" > р. | Сдача: {{moneyOfCustomer - sumOfOrder}} р.
+                </p>
+                <button class="btn btn-success btn-lg" (click)="order()">Оформить заказ</button>
+                <button class="btn btn-danger btn-lg" (click)="cancel()">Отменить заказ</button>
+           </div>
+        </div>
     </div>
 
     <div class="content">
