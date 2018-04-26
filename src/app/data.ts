@@ -51,7 +51,7 @@ export let products : Array<Product> = [
   
   export let holdedOrders : Array<HoldedOrder> = [
     {
-      sum : 100,
+      sum : 8,
       order : [2]
     }
   ];

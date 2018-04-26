@@ -13,7 +13,7 @@ export class ServiceComponent implements OnInit{
     @Input() moneyStream : Array<MoneyOperation>;
     @Input() orders : Array<Order>;
     @Input() amounts : AmountCounter;
-   // @Input() holdedOrders : Array<number[]>;
+   
     holdedOrders : Array<HoldedOrder> = holdedOrders;
     products : Product[] = products;
 

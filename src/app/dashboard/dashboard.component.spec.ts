@@ -7,7 +7,7 @@ import { SidebarComponent, RouteInfo, ROUTES } from '../sidebar/sidebar.componen
 
 
 describe('DashboardComponent', () => { 
-  let dashboardTest; 
+  let dashboardTest : DashboardComponent; 
   beforeEach(() => {
     dashboardTest = new DashboardComponent();
   });
@@ -16,8 +16,8 @@ describe('DashboardComponent', () => {
     
     it('1. should return array with numbers and length 6', () => {
     
-      let testArr = dashboardTest.ordersFromToday();
-      let status = true;
+      let testArr : Array<number> = dashboardTest.ordersFromToday();
+      let status : boolean = true;
       
       if (testArr.length !== 6) {
         status = false;

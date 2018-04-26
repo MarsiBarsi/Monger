@@ -8,7 +8,7 @@ import { FormControl, Validators, Form } from '@angular/forms'
 
 
 describe('StorageComponent', () => { 
-  let storageTest;
+  let storageTest : StorageComponent;
   let arg = new FormBuilder();
   beforeEach(() => {
     storageTest = new StorageComponent(arg);
@@ -19,7 +19,7 @@ describe('StorageComponent', () => {
 
     it('1. should count amount by adding new product', () => {
       
-      let numberOfProducts = amounts['products'];
+      let numberOfProducts : number = amounts['products'];
 
       storageTest.initForm();
       storageTest.newProductForm.value.name = 'test name';
@@ -42,7 +42,7 @@ describe('StorageComponent', () => {
 
       storageTest.addNewProduct();
       
-      let testProd = products.pop();
+      let testProd : Product = products.pop();
       
       expect(testProd.id > 0).toEqual(true);
       expect(testProd.name).toEqual('test name');
@@ -83,7 +83,7 @@ describe('StorageComponent', () => {
   describe('Changing', () => {
 
     it('1. should change the product correctly', () => {
-      let indexForTest = 1;
+      let indexForTest : number = 1;
 
       storageTest.initForm();
       
@@ -93,7 +93,7 @@ describe('StorageComponent', () => {
 
       storageTest.changeProduct();
 
-      let testProd = products[indexForTest - 1];
+      let testProd : Product = products[indexForTest - 1];
       
       expect(testProd.id).toEqual(1);
       expect(testProd.price).toEqual(15);
@@ -134,7 +134,7 @@ describe('StorageComponent', () => {
   describe('isControlInvalid() -> showing of notifications', () => {
 
     it('1. should return false for untouched form', () => {
-      let controlName = 'name';
+      let controlName : string = 'name';
       storageTest.initForm();
       storageTest.newProductForm.controls[controlName].touched = false;
 

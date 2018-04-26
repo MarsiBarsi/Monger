@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 
 
 describe('CashboxComponent', () => { 
-  let cashboxTest; 
+  let cashboxTest : CashboxComponent; 
   let arg = new FormBuilder();
   beforeEach(() => {
     cashboxTest = new CashboxComponent(arg);
@@ -15,10 +15,10 @@ describe('CashboxComponent', () => {
   describe('Adding new operation', () => {
     
     it('1. should add a new operation to the money stream', () => {
-      let savedAmount = amounts['moneyStream'];
+      let savedAmount : number = amounts['moneyStream'];
 
-      let savedName = 'test name';
-      let savedBalance = '10';
+      let savedName : string = 'test name';
+      let savedBalance : string = '10';
 
       cashboxTest.initForm();
 
@@ -34,8 +34,8 @@ describe('CashboxComponent', () => {
 
     it('2. should get ready to the new adding', () => {
       
-      let savedName = 'test name';
-      let savedBalance = '10';
+      let savedName : string = 'test name';
+      let savedBalance : string = '10';
 
       cashboxTest.initForm();
 
@@ -50,10 +50,10 @@ describe('CashboxComponent', () => {
     });
 
     it('3. should inscrease income by positive operation', () => {
-      let savedIncome = cashboxTest.income;
+      let savedIncome : number = cashboxTest.income;
 
-      let savedName = 'test name';
-      let savedBalance = '10';
+      let savedName : string = 'test name';
+      let savedBalance : string = '10';
 
       cashboxTest.initForm();
 
@@ -69,8 +69,8 @@ describe('CashboxComponent', () => {
     it('3. should insrease expense by negative operation', () => {
       let savedExpense = cashboxTest.expense;
 
-      let savedName = 'test name';
-      let savedBalance = '-10';
+      let savedName : string = 'test name';
+      let savedBalance : string = '-10';
       
       cashboxTest.initForm();
 

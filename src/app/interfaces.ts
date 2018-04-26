@@ -12,12 +12,6 @@ export interface MoneyOperation {
     income : number
 };
 
-export interface Order {
-    id : number,
-    date : Date,
-    products : Object // product_id = amount
-}
-
 export interface AmountCounter {
     products : number,
     moneyStream : number,
@@ -29,6 +23,12 @@ export interface FireCrm {
     products : Array<Product>,
     moneyStream : Array<MoneyOperation>,
     orders : Array<Order>
+}
+
+export interface Order {
+    id : number,
+    date : Date,
+    products : Object // product_id = amount
 }
 
 export declare interface Inputs {
