@@ -23,18 +23,18 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
-import { DataTablesModule } from 'angular-datatables'
+import { DataTablesModule } from 'angular-datatables';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyDvesSHD6cQ-jXKENOc3wbDCP4pAbNObjY",
-  authDomain: "monger-crm.firebaseapp.com",
-  databaseURL: "https://monger-crm.firebaseio.com",
-  projectId: "monger-crm",
-  storageBucket: "monger-crm.appspot.com",
-  messagingSenderId: "217864887577"
+  apiKey: 'AIzaSyDvesSHD6cQ-jXKENOc3wbDCP4pAbNObjY',
+  authDomain: 'monger-crm.firebaseapp.com',
+  databaseURL: 'https://monger-crm.firebaseio.com',
+  projectId: 'monger-crm',
+  storageBucket: 'monger-crm.appspot.com',
+  messagingSenderId: '217864887577'
 };
 
 

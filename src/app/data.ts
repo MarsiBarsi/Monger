@@ -1,4 +1,4 @@
-import { Product, MoneyOperation, Order, AmountCounter, HoldedOrder, FireCrm} from '../app/interfaces'
+import { Product, MoneyOperation, Order, AmountCounter, HoldedOrder, FireCrm} from '../app/interfaces';
 
 export let products : Array<Product> = [
     {
@@ -14,7 +14,7 @@ export let products : Array<Product> = [
       amount : 5
     }
   ];
-  
+
   export let moneyStream : Array<MoneyOperation> = [
     {
       id : 1,
@@ -27,9 +27,9 @@ export let products : Array<Product> = [
       date : new Date(2018, 0, 2, 0, 0, 0, 0),
       name : 'выплата зарплат',
       income : -50
-    } 
+    }
   ];
-  
+
   export let orders : Array<Order> = [
     {
       id : 1,
@@ -40,15 +40,15 @@ export let products : Array<Product> = [
       id : 2,
       date : new Date(),
       products : { 1 : 1, 2 : 3 }
-    } 
+    }
   ];
-  
+
   export let amounts : AmountCounter = {
     products : 2,
     moneyStream : 2,
-    orders : 2, 
-  }
-  
+    orders : 2,
+  };
+
   export let holdedOrders : Array<HoldedOrder> = [
     {
       sum : 8,

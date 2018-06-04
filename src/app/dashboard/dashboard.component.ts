@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as Chartist from 'chartist';
 import { SidebarComponent, RouteInfo, ROUTES } from '../sidebar/sidebar.component';
-import { orders } from '../data'
-import { Order } from '../interfaces'
+import { orders } from '../data';
+import { Order } from '../interfaces';
 
 interface RouteInfoWithIcon extends RouteInfo{
   iconClass : string;
@@ -27,12 +27,12 @@ export class DashboardComponent implements OnInit{
   public menuItems: RouteInfoWithIcon[] = [ ];
 
   ordersFromToday(): number[] {
-    let now : Date = new Date();
-    let outAmount : number[] = [0,0,0,0,0,0]; // 9-12-15-18-21-24
-    
+    const now : Date = new Date();
+    const outAmount : number[] = [0, 0, 0, 0, 0, 0]; // 9-12-15-18-21-24
+
     orders.forEach( elem => {
-      if (Number(now) - Number(elem.date) < 86400000) { // from the last day 
-        let hour : number = elem.date.getHours();
+      if (Number(now) - Number(elem.date) < 86400000) { // from the last day
+        const hour : number = elem.date.getHours();
         if (hour <= 16) { // 9-12-15
           if (hour >= 14) {
             outAmount[2]++;
@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit{
         }
       }
     });
-    outAmount['total'] = outAmount.reduce( (sum,elem) => {
+    outAmount['total'] = outAmount.reduce( (sum, elem) => {
       return sum + elem;
     });
     return outAmount;
@@ -76,19 +76,19 @@ export class DashboardComponent implements OnInit{
 
   ngOnInit(){
     this.menuCreating();
-  
-    let dataSales = {
+
+    const dataSales = {
       labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM'],
       series: [
         this.ordersFromToday()
       ]
     };
-  
-    let optionsSales = {
+
+    const optionsSales = {
       low: 0,
       high: (this.ordersFromToday())['total'] + 5 ,
       showArea: true,
-      height: "245px",
+      height: '245px',
       axisX: {
         showGrid: false,
       },
@@ -98,8 +98,8 @@ export class DashboardComponent implements OnInit{
       showLine: true,
       showPoint: false,
     };
-    
-    let responsiveSales: any[] = [
+
+    const responsiveSales: any[] = [
       ['screen and (max-width: 640px)', {
         axisX: {
           labelInterpolationFnc: function (value) {
@@ -108,7 +108,7 @@ export class DashboardComponent implements OnInit{
         }
       }]
     ];
-    new Chartist.Line('#chartHours', dataSales, optionsSales, responsiveSales); 
+    new Chartist.Line('#chartHours', dataSales, optionsSales, responsiveSales);
   }
 
 }

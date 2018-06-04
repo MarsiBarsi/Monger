@@ -1,43 +1,43 @@
 export interface Product {
-    id : number,
-    name : string,
-    price : number,
-    amount : number
+    id : number;
+    name : string;
+    price : number;
+    amount : number;
 };
 
 export interface MoneyOperation {
-    id : number,
-    date : Date,
-    name : string,
-    income : number
+    id : number;
+    date : Date;
+    name : string;
+    income : number;
 };
 
 export interface AmountCounter {
-    products : number,
-    moneyStream : number,
-    orders : number
+    products : number;
+    moneyStream : number;
+    orders : number;
 }
 
 export interface FireCrm {
-    amounts : AmountCounter,
-    products : Array<Product>,
-    moneyStream : Array<MoneyOperation>,
-    orders : Array<Order>
+    amounts : AmountCounter;
+    products : Array<Product>;
+    moneyStream : Array<MoneyOperation>;
+    orders : Array<Order>;
 }
 
 export interface Order {
-    id : number,
-    date : Date,
-    products : Object // product_id = amount
+    id : number;
+    date : Date;
+    products : Object; // product_id = amount
 }
 
 export declare interface Inputs {
-    name : string,
-    controlName : string,
-    wrongMes : string
+    name : string;
+    controlName : string;
+    wrongMes : string;
 }
 
 export interface HoldedOrder {
-    sum : number,
-    order : Array<number>
+    sum : number;
+    order : Array<number>;
 }

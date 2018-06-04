@@ -10,8 +10,8 @@ import { createNgModule } from '@angular/compiler/src/core';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 
-import { Product, MoneyOperation, Order, AmountCounter, FireCrm} from '../app/interfaces'
-import { products,moneyStream,orders,amounts } from '../app/data'
+import { Product, MoneyOperation, Order, AmountCounter, FireCrm} from '../app/interfaces';
+import { products, moneyStream, orders, amounts } from '../app/data';
 
 @Component({
   selector: 'app-root',
@@ -30,20 +30,20 @@ export class AppComponent{
   crm : Observable<FireCrm>;
 
   constructor(private afs: AngularFirestore) {};
-  
+
   ngOnInit() {
 
     this.crmDoc = this.afs.doc('crm/2O6FeLOoFWUtbdOkJDWR');
     this.crm = this.crmDoc.valueChanges();
 
-    let sub = this.crm.subscribe(elem => {
+    const sub = this.crm.subscribe(elem => {
       this.products = elem.products;
       this.orders = elem.orders;
       this.moneyStream = elem.moneyStream;
       this.amounts = elem.amounts;
       this.updateFire();
       sub.unsubscribe();
-    });    
+    });
   }
 
   updateFire(): void {

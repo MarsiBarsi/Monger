@@ -1,8 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser'; 
+import { BrowserModule } from '@angular/platform-browser';
 import { Component, OnInit, ApplicationInitStatus, Input } from '@angular/core';
-import { TableData } from '../stats/stats.component'
-import { FormControl, Validators, Form } from '@angular/forms'
-import { products,amounts } from '../data'
+import { TableData } from '../stats/stats.component';
+import { FormControl, Validators, Form } from '@angular/forms';
+import { products, amounts } from '../data';
 import { Product, AmountCounter, Inputs } from '../interfaces';
 
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -70,15 +70,15 @@ export class StorageComponent implements OnInit {
 
     initForm(): void {
         this.newProductForm = this.fb.group({
-            name: ['',[Validators.required]],
-            price : [null,[Validators.min(0)]],
-            amount : [null,[Validators.min(0)]]
+            name: ['', [Validators.required]],
+            price : [null, [Validators.min(0)]],
+            amount : [null, [Validators.min(0)]]
         });
 
         this.changeProductForm = this.fb.group({
-            id: [null,[Validators.min(1),Validators.max(amounts.products)]],
-            newPrice : [null,[Validators.min(0)]],
-            newAmount : [null,[Validators.min(0)]]
+            id: [null, [Validators.min(1), Validators.max(amounts.products)]],
+            newPrice : [null, [Validators.min(0)]],
+            newAmount : [null, [Validators.min(0)]]
         });
     }
 
@@ -91,7 +91,7 @@ export class StorageComponent implements OnInit {
 
     ngOnInit(){
         this.initForm();
-        
+
         this.storageTable = {
             headerRow: [ 'Артикул', 'Название товара', 'Стоимость', 'Остаток', ''],
             dataRows: products
@@ -106,12 +106,12 @@ export class StorageComponent implements OnInit {
             price : Number(this.newProductForm.value.price),
             amount : Number(this.newProductForm.value.amount)
         });
-        
+
         this.newProductForm.setValue({
             name : [''],
             price : [null],
             amount : [null]
-        });  
+        });
     }
 
     deleteProduct(indexOfProd : number): void {
@@ -121,13 +121,13 @@ export class StorageComponent implements OnInit {
             price : -1,
             amount : -1
         };
-        
-    } 
+
+    }
 
     changeProduct(): void {
         products[Number(this.changeProductForm.value.id - 1)].price = Number(this.changeProductForm.value.newPrice);
         products[Number(this.changeProductForm.value.id - 1)].amount = Number(this.changeProductForm.value.newAmount);
-        
+
         this.changeProductForm.setValue({
             id : [null],
             newPrice : [null],

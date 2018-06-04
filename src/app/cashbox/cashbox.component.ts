@@ -1,9 +1,9 @@
-import { BrowserModule } from '@angular/platform-browser'; 
+import { BrowserModule } from '@angular/platform-browser';
 import { Component, OnInit, Input } from '@angular/core';
-import { TableData } from '../stats/stats.component'
-import { FormGroup,  FormBuilder, FormControl, Validators } from '@angular/forms'
+import { TableData } from '../stats/stats.component';
+import { FormGroup,  FormBuilder, FormControl, Validators } from '@angular/forms';
 
-import { moneyStream,amounts } from '../data'
+import { moneyStream, amounts } from '../data';
 import { MoneyOperation, AmountCounter, Inputs } from '../interfaces';
 
 
@@ -39,33 +39,33 @@ export class CashboxComponent{
     ];
 
     public cashboxTable: CashboxTableData;
-    
-    income : number = 0
-    expense : number = 0;
+
+    income = 0;
+    expense = 0;
 
     initForm(): void {
         this.CashboxForm = this.fb.group({
-            name: ['',[Validators.required]],
+            name: ['', [Validators.required]],
             income : [null]
         });
     }
-    
+
     ngOnInit(){
         this.initForm();
-        
+
         this.cashboxTable = {
             headerRow: [ '#', 'дата', 'Операция', 'Баланс'],
             dataRows: moneyStream
         };
-        
-        for (let elem of this.cashboxTable.dataRows) {
+
+        for (const elem of this.cashboxTable.dataRows) {
             if (elem.income > 0) {
                 this.income += elem.income;
             } else {
                 this.expense += -(elem.income);
-            }         
+            }
         }
-         
+
     };
 
     isControlInvalid(form : FormGroup, controlName : string): boolean {
@@ -81,7 +81,7 @@ export class CashboxComponent{
             name : this.CashboxForm.value.name,
             income : Number(this.CashboxForm.value.income)
         });
-        
+
         if (Number(this.CashboxForm.value.income) > 0) {
             this.income += Number(this.CashboxForm.value.income);
         } else {
@@ -91,7 +91,7 @@ export class CashboxComponent{
         this.CashboxForm.setValue({
             name : [''],
             income : [null]
-        });  
+        });
     };
 
 }

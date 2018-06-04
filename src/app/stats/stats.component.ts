@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
 import * as Chartist from 'chartist';
-import { products,moneyStream,orders,amounts } from '../data'
-import { Product, MoneyOperation, Order, AmountCounter} from '../interfaces'
+import { products, moneyStream, orders, amounts } from '../data';
+import { Product, MoneyOperation, Order, AmountCounter} from '../interfaces';
 
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 
@@ -21,7 +21,7 @@ export declare interface TableData {
 })
 
 export class StatsComponent implements OnInit{
-    
+
 
     @Input() products: Array<Product>;
     @Input() moneyStream : Array<MoneyOperation>;
@@ -32,17 +32,17 @@ export class StatsComponent implements OnInit{
     @HostListener('window:resize', ['$event']) onResize(event) {
         this.winWidth = event.target.innerWidth;
     }
-  
+
     public wholeStatistics = [
-        { 
+        {
             mes : 'Всего заказов завершено',
             value  : amounts['orders']
         },
-        { 
+        {
             mes : 'Всего операций выполнено',
             value  : amounts['moneyStream']
         },
-        { 
+        {
             mes : 'Типов товаров',
             value  : amounts['products']
         }
@@ -50,35 +50,35 @@ export class StatsComponent implements OnInit{
 
     single: any[];
     multi: any[];
-    
-    cardSize : Array<number> = [];
-    
 
-    view: any[] = [this.winWidth / 3,400];
-    
+    cardSize : Array<number> = [];
+
+
+    view: any[] = [this.winWidth / 3, 400];
+
 
     colorScheme = {
-      domain: ['#7fb5b5','#6dae81','#5AA454', '#A10A28', '#C7B42C', '#AAAAAA','#ffcc00','#ffad99','#77d4c4']
+      domain: ['#7fb5b5', '#6dae81', '#5AA454', '#A10A28', '#C7B42C', '#AAAAAA', '#ffcc00', '#ffad99', '#77d4c4']
     };
-  
+
     constructor() {
-      Object.assign(this, {data})   
+      Object.assign(this, {data});
     }
-    
+
     onSelect(event): void {
       //console.log(event);
     }
 
 
     selectStatistics(): void {
-        
-        let arrayOfProducts = [];
-        
+
+        const arrayOfProducts = [];
+
         orders.forEach( elem => {
-            for(let key in elem.products) {
-                if( arrayOfProducts[Number(key)]) {
+            for (const key in elem.products) {
+                if ( arrayOfProducts[Number(key)]) {
                     arrayOfProducts[Number(key)] += Number(elem.products[key]);
-                } 
+                }
                 else {
                     arrayOfProducts[Number(key)] = Number(elem.products[key]);
                 }
@@ -86,20 +86,20 @@ export class StatsComponent implements OnInit{
         });
 
         let i = 0;
-        arrayOfProducts.forEach( (elem,index) => {
+        arrayOfProducts.forEach( (elem, index) => {
             data[i] = {
                 name : products[index - 1].name,
                 value : elem
             };
             i++;
         });
-        
+
     }
-    
+
 
     getMainProfit() {
-        
-        let finalObject = {
+
+        const finalObject = {
           labels : [],
           series : [
               []
@@ -131,16 +131,16 @@ export class StatsComponent implements OnInit{
     }
 
     ngOnInit(){
-        
+
         this.selectStatistics();
-        
-        let dataMoneyStream = this.getMainProfit();
-                
-        let optionsMoneyStream = {
+
+        const dataMoneyStream = this.getMainProfit();
+
+        const optionsMoneyStream = {
           low: this.getMainProfit().min - 5,
           high: this.getMainProfit().max + 5 ,
           showArea: true,
-          height: "245px",
+          height: '245px',
           axisX: {
             showGrid: false,
           },
@@ -150,8 +150,8 @@ export class StatsComponent implements OnInit{
           showLine: true,
           showPoint: false,
         };
-    
-        let responsiveMoneyStream: any[] = [
+
+        const responsiveMoneyStream: any[] = [
           ['screen and (max-width: 640px)', {
             axisX: {
               labelInterpolationFnc: function (value) {

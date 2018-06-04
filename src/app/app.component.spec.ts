@@ -2,13 +2,13 @@ import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
 
-describe('AppComponent', () => {  
+describe('AppComponent', () => {
     let AppCompTest : AppComponent;
-    let arg;
+    const arg;
     beforeEach(async(() => {
         AppCompTest = new AppComponent(arg);
     }));
-    
+
     it('1. should create the app', async(() => {
       expect(AppCompTest).toBeTruthy();
     }));

@@ -1,7 +1,7 @@
-import { Component, OnInit,HostListener, Input } from '@angular/core';
+import { Component, OnInit, HostListener, Input } from '@angular/core';
 
-import { products,moneyStream,orders,amounts,holdedOrders } from '../data'
-import { Product, MoneyOperation, Order, AmountCounter,HoldedOrder } from '../interfaces';
+import { products, moneyStream, orders, amounts, holdedOrders } from '../data';
+import { Product, MoneyOperation, Order, AmountCounter, HoldedOrder } from '../interfaces';
 
 @Component({
     selector: 'service-cmp',
@@ -13,18 +13,18 @@ export class ServiceComponent implements OnInit{
     @Input() moneyStream : Array<MoneyOperation>;
     @Input() orders : Array<Order>;
     @Input() amounts : AmountCounter;
-   
+
     holdedOrders : Array<HoldedOrder> = holdedOrders;
     products : Product[] = products;
 
-    sumOfOrder : number = 0;
-    moneyOfCustomer : number = 0;
-    
+    sumOfOrder = 0;
+    moneyOfCustomer = 0;
+
     productsInOrder : Array<number> = [
-        
+
     ]; // productsInOrder[id_товара] = кол-во товара
 
-    ngOnInit(){    
+    ngOnInit(){
     }
 
     minusProduct(idInList : number): void {
@@ -32,7 +32,7 @@ export class ServiceComponent implements OnInit{
             this.productsInOrder[idInList]--;
             this.sumOfOrder -= products[idInList].price;
             products[idInList].amount++;
-            
+
         }
     }
 
@@ -51,11 +51,11 @@ export class ServiceComponent implements OnInit{
 
     order(): void {
         // заказ
-        let soldProducts : Object = new Object();
-        
+        const soldProducts : Object = new Object();
+
         for (let i = 0; i < this.productsInOrder.length; i++) {
             if (this.productsInOrder[i]) {
-                soldProducts[i+1] = this.productsInOrder[i];
+                soldProducts[i + 1] = this.productsInOrder[i];
             }
         }
 
@@ -64,7 +64,7 @@ export class ServiceComponent implements OnInit{
             date : new Date(),
             products : soldProducts
         });
-        
+
         // денежная операция
         moneyStream.push({
            id : ++amounts['moneyStream'],
@@ -80,10 +80,10 @@ export class ServiceComponent implements OnInit{
     }
 
     cancel(): void {
-        this.productsInOrder.forEach( (elem,index) => {
+        this.productsInOrder.forEach( (elem, index) => {
             products[index].amount += elem;
         });
-        
+
         this.productsInOrder = [];
         this.sumOfOrder = 0;
         this.moneyOfCustomer = 0;
@@ -97,8 +97,8 @@ export class ServiceComponent implements OnInit{
     }
 
     ngOnDestroy(): void {
-        if(this.productsInOrder.length){
-            let holdStatus = confirm('Заказ не завершен. Отложить?');
+        if (this.productsInOrder.length){
+            const holdStatus = confirm('Заказ не завершен. Отложить?');
             if (holdStatus) {
                 holdedOrders.push({
                     sum : this.sumOfOrder,
