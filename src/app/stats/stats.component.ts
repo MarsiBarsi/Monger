@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
-import { products, moneyStream, orders, amounts } from '../data';
-import { Product, MoneyOperation, Order, AmountCounter} from '../interfaces';
+import { amounts, moneyStream, orders, products } from '../data';
+import { AmountCounter, MoneyOperation, Order, Product} from '../interfaces';
 
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 
-export let data : Array<Object> = [];
+export let data : Object[] = [];
 
 
 export declare interface TableData {
@@ -23,9 +23,9 @@ export declare interface TableData {
 export class StatsComponent implements OnInit{
 
 
-    @Input() products: Array<Product>;
-    @Input() moneyStream : Array<MoneyOperation>;
-    @Input() orders : Array<Order>;
+    @Input() products: Product[];
+    @Input() moneyStream : MoneyOperation[];
+    @Input() orders : Order[];
     @Input() amounts : AmountCounter;
 
     winWidth : number;
@@ -51,7 +51,7 @@ export class StatsComponent implements OnInit{
     single: any[];
     multi: any[];
 
-    cardSize : Array<number> = [];
+    cardSize : number[] = [];
 
 
     view: any[] = [this.winWidth / 3, 400];

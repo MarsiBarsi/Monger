@@ -1,6 +1,6 @@
-import { Product, MoneyOperation, Order, AmountCounter, HoldedOrder, FireCrm} from '../app/interfaces';
+import { AmountCounter, FireCrm, HoldedOrder, MoneyOperation, Order, Product} from '../app/interfaces';
 
-export let products : Array<Product> = [
+export let products : Product[] = [
     {
       id : 1,
       name : 'товар 1',
@@ -15,7 +15,7 @@ export let products : Array<Product> = [
     }
   ];
 
-  export let moneyStream : Array<MoneyOperation> = [
+  export let moneyStream : MoneyOperation[] = [
     {
       id : 1,
       date : new Date(2018, 0, 1, 0, 0, 0, 0),
@@ -30,7 +30,7 @@ export let products : Array<Product> = [
     }
   ];
 
-  export let orders : Array<Order> = [
+  export let orders : Order[] = [
     {
       id : 1,
       date : new Date(2018, 0, 1, 0, 0, 0, 0),
@@ -49,7 +49,7 @@ export let products : Array<Product> = [
     orders : 2,
   };
 
-  export let holdedOrders : Array<HoldedOrder> = [
+  export let holdedOrders : HoldedOrder[] = [
     {
       sum : 8,
       order : [2]

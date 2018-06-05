@@ -20,9 +20,9 @@ export interface AmountCounter {
 
 export interface FireCrm {
     amounts : AmountCounter;
-    products : Array<Product>;
-    moneyStream : Array<MoneyOperation>;
-    orders : Array<Order>;
+    products : Product[];
+    moneyStream : MoneyOperation[];
+    orders : Order[];
 }
 
 export interface Order {
@@ -39,5 +39,5 @@ export declare interface Inputs {
 
 export interface HoldedOrder {
     sum : number;
-    order : Array<number>;
+    order : number[];
 }

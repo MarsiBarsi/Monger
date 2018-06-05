@@ -1,7 +1,7 @@
-import { Component, OnInit, Renderer, ViewChild, ElementRef } from '@angular/core';
-import { ROUTES } from '../../sidebar/sidebar.component';
-import { Router, ActivatedRoute } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { Component, ElementRef, OnInit, Renderer, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ROUTES } from '../../sidebar/sidebar.component';
 
 @Component({
     moduleId: module.id,

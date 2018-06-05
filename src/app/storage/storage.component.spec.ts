@@ -1,9 +1,9 @@
-import { TestBed, async } from '@angular/core/testing';
-import { StorageComponent } from './storage.component';
-import { products, amounts } from '../data';
-import { Product, AmountCounter, Inputs } from '../interfaces';
+import { async, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
-import { FormControl, Validators, Form } from '@angular/forms';
+import { Form, FormControl, Validators } from '@angular/forms';
+import { amounts, products } from '../data';
+import { AmountCounter, Inputs, Product } from '../interfaces';
+import { StorageComponent } from './storage.component';
 
 
 

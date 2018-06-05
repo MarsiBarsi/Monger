@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 
+import { CashboxComponent }   from './cashbox/cashbox.component';
 import { DashboardComponent }   from './dashboard/dashboard.component';
+import { FeedbackComponent }   from './feedback/feedback.component';
 import { ServiceComponent }   from './service/service.component';
 import { StatsComponent }   from './stats/stats.component';
-import { CashboxComponent }   from './cashbox/cashbox.component';
 import { StorageComponent }   from './storage/storage.component';
-import { FeedbackComponent }   from './feedback/feedback.component';
 
 export const AppRoutes: Routes = [
     {

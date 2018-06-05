@@ -1,16 +1,16 @@
+import { ApplicationInitStatus, Component, Input, OnInit } from '@angular/core';
+import { Form, FormControl, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { Component, OnInit, ApplicationInitStatus, Input } from '@angular/core';
+import { amounts, products } from '../data';
+import { AmountCounter, Inputs, Product } from '../interfaces';
 import { TableData } from '../stats/stats.component';
-import { FormControl, Validators, Form } from '@angular/forms';
-import { products, amounts } from '../data';
-import { Product, AmountCounter, Inputs } from '../interfaces';
 
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 
 declare interface StorageTableData {
     headerRow: string[];
-    dataRows : Array<Product>;
+    dataRows : Product[];
 }
 
 

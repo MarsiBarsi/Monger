@@ -1,17 +1,17 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms/src/model';
 
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
 
 import { query } from '@angular/animations';
 import { createNgModule } from '@angular/compiler/src/core';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 
-import { Product, MoneyOperation, Order, AmountCounter, FireCrm} from '../app/interfaces';
-import { products, moneyStream, orders, amounts } from '../app/data';
+import { amounts, moneyStream, orders, products } from '../app/data';
+import { AmountCounter, FireCrm, MoneyOperation, Order, Product} from '../app/interfaces';
 
 @Component({
   selector: 'app-root',
@@ -21,9 +21,9 @@ import { products, moneyStream, orders, amounts } from '../app/data';
 
 
 export class AppComponent{
-  @Input() products: Array<Product>;
-  @Input() moneyStream : Array<MoneyOperation>;
-  @Input() orders : Array<Order>;
+  @Input() products: Product[];
+  @Input() moneyStream : MoneyOperation[];
+  @Input() orders : Order[];
   @Input() amounts : AmountCounter;
 
   crmDoc : AngularFirestoreDocument<FireCrm>;
@@ -48,10 +48,10 @@ export class AppComponent{
 
   updateFire(): void {
     setInterval(async () => this.crmDoc.set({
-      products : products,
-      amounts : amounts,
-      orders : orders,
-      moneyStream : moneyStream
+      products,
+      amounts,
+      orders,
+      moneyStream
     }), 2000);
   }
 

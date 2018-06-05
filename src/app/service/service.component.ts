@@ -1,7 +1,7 @@
-import { Component, OnInit, HostListener, Input } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 
-import { products, moneyStream, orders, amounts, holdedOrders } from '../data';
-import { Product, MoneyOperation, Order, AmountCounter, HoldedOrder } from '../interfaces';
+import { amounts, holdedOrders, moneyStream, orders, products } from '../data';
+import { AmountCounter, HoldedOrder, MoneyOperation, Order, Product } from '../interfaces';
 
 @Component({
     selector: 'service-cmp',
@@ -10,17 +10,17 @@ import { Product, MoneyOperation, Order, AmountCounter, HoldedOrder } from '../i
 })
 
 export class ServiceComponent implements OnInit{
-    @Input() moneyStream : Array<MoneyOperation>;
-    @Input() orders : Array<Order>;
+    @Input() moneyStream : MoneyOperation[];
+    @Input() orders : Order[];
     @Input() amounts : AmountCounter;
 
-    holdedOrders : Array<HoldedOrder> = holdedOrders;
+    holdedOrders : HoldedOrder[] = holdedOrders;
     products : Product[] = products;
 
     sumOfOrder = 0;
     moneyOfCustomer = 0;
 
-    productsInOrder : Array<number> = [
+    productsInOrder : number[] = [
 
     ]; // productsInOrder[id_товара] = кол-во товара
 

@@ -1,8 +1,8 @@
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { amounts, moneyStream } from '../data';
+import { AmountCounter, Inputs, MoneyOperation } from '../interfaces';
 import { CashboxComponent } from './cashbox.component';
-import { moneyStream, amounts } from '../data';
-import { MoneyOperation, AmountCounter, Inputs } from '../interfaces';
-import { FormGroup, FormBuilder } from '@angular/forms';
 
 
 describe('CashboxComponent', () => {

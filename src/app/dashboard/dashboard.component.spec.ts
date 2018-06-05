@@ -1,9 +1,9 @@
-import { TestBed, async } from '@angular/core/testing';
-import { DashboardComponent } from './dashboard.component';
+import { async, TestBed } from '@angular/core/testing';
+import { isNumber } from '@swimlane/ngx-charts/release/utils';
 import { orders } from '../data';
 import { Order } from '../interfaces';
-import { isNumber } from '@swimlane/ngx-charts/release/utils';
-import { SidebarComponent, RouteInfo, ROUTES } from '../sidebar/sidebar.component';
+import { RouteInfo, ROUTES, SidebarComponent } from '../sidebar/sidebar.component';
+import { DashboardComponent } from './dashboard.component';
 
 
 describe('DashboardComponent', () => {
@@ -16,7 +16,7 @@ describe('DashboardComponent', () => {
 
     it('1. should return array with numbers and length 6', () => {
 
-      const testArr : Array<number> = dashboardTest.ordersFromToday();
+      const testArr : number[] = dashboardTest.ordersFromToday();
       let status = true;
 
       if (testArr.length !== 6) {

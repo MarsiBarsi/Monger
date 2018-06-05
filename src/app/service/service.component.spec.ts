@@ -1,9 +1,9 @@
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 import { ServiceComponent } from './service.component';
 
-import { products, moneyStream, orders, amounts, holdedOrders } from '../data';
-import { Product, MoneyOperation, Order, AmountCounter, HoldedOrder } from '../interfaces';
 import { Component } from '@angular/core';
+import { amounts, holdedOrders, moneyStream, orders, products } from '../data';
+import { AmountCounter, HoldedOrder, MoneyOperation, Order, Product } from '../interfaces';
 
 
 describe('ServiceComponent', () => {
@@ -209,5 +209,5 @@ describe('ServiceComponent', () => {
   });
 
 
-}); ;
+}); ; ;
 

@@ -1,20 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
-import { SidebarModule } from './sidebar/sidebar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule} from './shared/navbar/navbar.module';
+import { SidebarModule } from './sidebar/sidebar.module';
 
+import { CashboxComponent }   from './cashbox/cashbox.component';
 import { DashboardComponent }   from './dashboard/dashboard.component';
+import { FeedbackComponent }   from './feedback/feedback.component';
 import { ServiceComponent }   from './service/service.component';
 import { StatsComponent }   from './stats/stats.component';
-import { CashboxComponent }   from './cashbox/cashbox.component';
 import { StorageComponent }   from './storage/storage.component';
-import { FeedbackComponent }   from './feedback/feedback.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 

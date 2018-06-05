@@ -1,15 +1,15 @@
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder,  FormControl, FormGroup, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { Component, OnInit, Input } from '@angular/core';
 import { TableData } from '../stats/stats.component';
-import { FormGroup,  FormBuilder, FormControl, Validators } from '@angular/forms';
 
-import { moneyStream, amounts } from '../data';
-import { MoneyOperation, AmountCounter, Inputs } from '../interfaces';
+import { amounts, moneyStream } from '../data';
+import { AmountCounter, Inputs, MoneyOperation } from '../interfaces';
 
 
 declare interface CashboxTableData {
     headerRow: string[];
-    dataRows: Array<MoneyOperation>; // id,операция,доход или убыток
+    dataRows: MoneyOperation[]; // id,операция,доход или убыток
 }
 
 @Component({
@@ -20,7 +20,7 @@ declare interface CashboxTableData {
 
 export class CashboxComponent{
     @Input() amounts : AmountCounter;
-    @Input() moneyStream : Array<MoneyOperation>;
+    @Input() moneyStream : MoneyOperation[];
 
     public CashboxForm : FormGroup;
     constructor(private fb: FormBuilder){}
